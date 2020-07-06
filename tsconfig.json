@@ -21,6 +21,9 @@
       ],
       "@todo-workspace/data-access/services/tasks": [
         "libs/data-access/services/tasks/src/index.ts"
+      ],
+      "@todo-workspace/data-access/store": [
+        "libs/data-access/store/src/index.ts"
       ]
     }
   },

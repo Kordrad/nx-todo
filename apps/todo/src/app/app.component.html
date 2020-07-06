@@ -1,14 +1,30 @@
 <h1>{{title}}</h1>
-<label>
-  <input placeholder="Add to do"/>
-</label>
+<div *ngIf="task$ | async as t">
+  <label>
+    <input placeholder="Add to do" [(ngModel)]="text"/>
 
+  </label>
+    <button (click)="pushTask()">Add To List</button>
+  <br/>
+  <br/>
+  <span>
+    {{t.tasks | json}}
+  </span>
+</div>
 <h3>Things to do:</h3>
 <ul>
-  <li *ngFor="let task of tasksToDo">{{task.title}}</li>
+  <li *ngFor="let task of tasksToDo">
+    <label>
+      <input type="checkbox" [checked]="task.completed"/>
+    </label>{{task.title}}
+  </li>
 </ul>
 <h3>Things already done:</h3>
 <ul>
-  <li *ngFor="let task of tasksDone">{{task.title}}</li>
+  <li *ngFor="let task of tasksDone">
+    <label>
+      <input type="checkbox" [checked]="task.completed"/>
+    </label>{{task.title}}
+  </li>
 </ul>
 

@@ -34,6 +34,9 @@
     },
     "data-access-services-tasks": {
       "tags": []
+    },
+    "data-access-store": {
+      "tags": []
     }
   }
 }

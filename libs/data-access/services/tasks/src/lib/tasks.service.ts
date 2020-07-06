@@ -25,10 +25,6 @@ export class TasksService {
     return this.http.get<Array<Task>>(this.url, { params: urlParams });
   }
 
-  getTask(id: number): Observable<Task> {
-    return this.http.get<Task>(`${this.url}${id}`);
-  }
-
 
   updateTask(task): Observable<Task> {
     return this.http.put<Task>(`${this.url}${task.id}`, task);

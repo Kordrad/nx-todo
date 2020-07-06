@@ -185,6 +185,38 @@
           "style": "scss"
         }
       }
+    },
+    "data-access-store": {
+      "projectType": "library",
+      "root": "libs/data-access/store",
+      "sourceRoot": "libs/data-access/store/src",
+      "prefix": "todo-workspace",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/data-access/store/tsconfig.lib.json",
+              "libs/data-access/store/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/data-access/store/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/data-access/store/jest.config.js",
+            "tsConfig": "libs/data-access/store/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/data-access/store/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
     }
   },
   "cli": {
