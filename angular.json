@@ -150,6 +150,41 @@
           }
         }
       }
+    },
+    "data-access-services-tasks": {
+      "projectType": "library",
+      "root": "libs/data-access/services/tasks",
+      "sourceRoot": "libs/data-access/services/tasks/src",
+      "prefix": "todo-workspace",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/data-access/services/tasks/tsconfig.lib.json",
+              "libs/data-access/services/tasks/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/data-access/services/tasks/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/data-access/services/tasks/jest.config.js",
+            "tsConfig": "libs/data-access/services/tasks/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/data-access/services/tasks/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
     }
   },
   "cli": {

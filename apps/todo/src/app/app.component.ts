@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TasksService } from './service/tasks.service';
+import { TasksService } from '@todo-workspace/data-access/services/tasks';
 import { Task } from '@todo-workspace/domain/interfaces/data';
 
 @Component({

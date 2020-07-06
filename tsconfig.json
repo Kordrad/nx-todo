@@ -18,6 +18,9 @@
     "paths": {
       "@todo-workspace/domain/interfaces/data": [
         "libs/domain/interfaces/data/src/index.ts"
+      ],
+      "@todo-workspace/data-access/services/tasks": [
+        "libs/data-access/services/tasks/src/index.ts"
       ]
     }
   },

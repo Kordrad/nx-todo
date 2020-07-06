@@ -31,6 +31,9 @@
     },
     "domain-interfaces-data": {
       "tags": []
+    },
+    "data-access-services-tasks": {
+      "tags": []
     }
   }
 }
