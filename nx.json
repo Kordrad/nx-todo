@@ -28,6 +28,9 @@
     "todo-e2e": {
       "tags": [],
       "implicitDependencies": ["todo"]
+    },
+    "domain-interfaces-data": {
+      "tags": []
     }
   }
 }

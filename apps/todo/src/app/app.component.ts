@@ -1,12 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TasksService } from './service/tasks.service';
-
-interface Task {
-  userId: number,
-  id: number,
-  title: string,
-  completed: boolean
-}
+import { Task } from '@todo-workspace/domain/interfaces/data';
 
 @Component({
   selector: 'todo-workspace-root',
@@ -26,20 +20,21 @@ export class AppComponent implements OnInit {
   tasksDone: Task[] = [];
   paginationToDo = 1;
   paginationDone = 1;
+
   constructor(private tasksService: TasksService) {
   }
 
   ngOnInit() {
     this.tasksService.getTasks({
-      "completed": false,
-      "_page": 1
+      'completed': false,
+      '_page': 1
     }).subscribe((tasks: Task[]) => {
       this.tasksToDo = tasks;
     });
 
     this.tasksService.getTasks({
-      "completed": true,
-      "_page": 1
+      'completed': true,
+      '_page': 1
     }).subscribe((tasks: Task[]) => {
       this.tasksDone = tasks;
     });

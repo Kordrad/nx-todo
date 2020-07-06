@@ -1,13 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-interface Task {
-  userId: number,
-  id: number,
-  title: string,
-  completed: boolean
-}
+import { Task } from '@todo-workspace/domain/interfaces/data';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +20,7 @@ export class TasksService {
   getTasks(params?: Object): Observable<Array<Task>> {
     let urlParams = new HttpParams();
     Object.keys(params).forEach((param) => {
-      urlParams = urlParams.set(param, params[param])
+      urlParams = urlParams.set(param, params[param]);
     });
     return this.http.get<Array<Task>>(this.url, { params: urlParams });
   }
