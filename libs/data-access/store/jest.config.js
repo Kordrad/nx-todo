@@ -1,7 +1,7 @@
 module.exports = {
-  name: 'data-access-services-tasks',
-  preset: '../../../../jest.config.js',
-  coverageDirectory: '../../../../coverage/libs/data-access/services/tasks',
+  name: 'data-access-store',
+  preset: '../../../jest.config.js',
+  coverageDirectory: '../../../coverage/libs/data-access/store',
   snapshotSerializers: [
     'jest-preset-angular/build/AngularNoNgAttributesSnapshotSerializer.js',
     'jest-preset-angular/build/AngularSnapshotSerializer.js',

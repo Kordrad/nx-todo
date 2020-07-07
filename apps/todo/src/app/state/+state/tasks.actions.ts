@@ -1,18 +1,42 @@
 import { Action } from '@ngrx/store';
+import { Task } from '@todo-workspace/domain/interfaces/data';
 
-export const ADD_TASK = '[Task] Add task';
-export const REMOVE_TASK = '[Task] Remove task';
+export const CREATE = '[Task] Create';
+export const UPDATE = '[Task] Update';
+export const DELETE = '[Task] Delete';
+export const LOAD = '[Task] Load'
+export const LOADED = '[Task] Loaded'
 
+export class Load implements  Action {
+  readonly  type = LOAD;
+}
 
-export class addTask implements Action {
-  readonly type = ADD_TASK;
+export class Loaded implements  Action {
+  readonly  type = LOADED;
 
-  constructor(public payload: { title: string }) {
+  constructor(public tasks: Task[]) {
   }
 }
 
-export class removeTask {
-  readonly type = REMOVE_TASK;
+export class Create implements Action {
+  readonly type = CREATE;
+
+  constructor(public task: Task) {
+  }
 }
 
-export type All = addTask | removeTask
+export class Update implements Action {
+  readonly type = UPDATE;
+
+  constructor(public payload: Task) {
+  }
+}
+
+export class Delete implements Action {
+  readonly type = DELETE;
+
+  constructor(public id: string) {
+  }
+}
+
+export type TasksActions = Create | Update | Delete | Load | Loaded;

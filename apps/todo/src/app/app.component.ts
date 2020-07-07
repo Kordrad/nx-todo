@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { TasksService } from '@todo-workspace/data-access/services/tasks';
 import { Task } from '@todo-workspace/domain/interfaces/data';
 import { Store } from '@ngrx/store';
-import * as TaskActions from './state/+state/tasks.actions';
 import { Observable } from 'rxjs';
-import { TasksState } from './state/state';
+import { TasksState } from './state/task';
+import { getAllTasks } from './state/+state/tasks.selectors';
+import * as taskActions from './state/+state/tasks.actions';
+
 
 @Component({
   selector: 'todo-workspace-root',
@@ -12,54 +13,44 @@ import { TasksState } from './state/state';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'todo';
-  newTask: Task = {
-    'userId': 1,
-    'id': 101,
-    'title': 'update task',
-    'completed': true
-  };
+  header = 'To do list';
 
-  tasksToDo: Task[] = [];
-  tasksDone: Task[] = [];
-  paginationToDo = 1;
-  paginationDone = 1;
-  task$: Observable<Task>;
-  text: string;
+  task$: Observable<Task[]>;
+  taskStore$: Observable<any[]>;
 
-  constructor(private tasksService: TasksService, private store: Store<TasksState>) {
-    this.task$ = this.store.select('tasks');
+
+  // New Task
+  title: string;
+
+  constructor(private store: Store<TasksState>) {
+    this.task$ = this.store.select(getAllTasks);
+    this.taskStore$ = this.store.select('tasks');
   }
 
-  pushTask() {
-    this.store.dispatch(new TaskActions.addTask({
-      title: this.text
-    }));
-    this.text = '';
-  };
-
   ngOnInit() {
-    // this.tasksService.getTasks({
-    //   'completed': false,
-    //   '_page': 1
-    // }).subscribe((tasks: Task[]) => {
-    //   this.tasksToDo = tasks;
-    // });
-    //
-    // this.tasksService.getTasks({
-    //   'completed': true,
-    //   '_page': 1
-    // }).subscribe((tasks: Task[]) => {
-    //   this.tasksDone = tasks;
-    // });
-    // this.tasksService.createTasks(this.newTask).subscribe((task: Task) => {
-    //   console.log(task);
-    // });
-    // this.tasksService.updateTask({ ...this.newTask, 'id': 1 }).subscribe((task: Task) => {
-    //   console.log(task);
-    // });
-    // this.tasksService.deleteTask(1).subscribe((task: Task) => {
-    //   console.log(task);
-    // });
+    this.store.dispatch(new taskActions.Load());
+  }
+
+  addTask() {
+    if (this.title) {
+      this.store.dispatch(new taskActions.Create({
+        'title': this.title,
+        'completed': false,
+        'userId': 1,
+        'id': new Date().valueOf()
+      }));
+      this.title = '';
+    }
+  }
+
+  updateTask(id: number, completed: boolean) {
+    this.store.dispatch(new taskActions.Update({
+      id: id,
+      completed: completed,
+    }));
+  }
+
+  deleteTask(id: number) {
+    this.store.dispatch(new taskActions.Delete(`${id}`));
   }
 }

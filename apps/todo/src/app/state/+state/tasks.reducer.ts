@@ -1,45 +1,40 @@
-import * as TaskActions from './tasks.actions';
-import { TasksState } from '../state';
+import * as actions from './tasks.actions';
 import { Task } from '@todo-workspace/domain/interfaces/data';
+import { createEntityAdapter, EntityState, EntityAdapter } from '@ngrx/entity';
 
-export type Action = TaskActions.All;
+export interface TaskState extends EntityState<Task>{
+  tasksLoaded: boolean
+}
 
-const defaultState: TasksState = {
-  tasksOrderIds: [],
-  tasks: {}
-};
+export const adapter: EntityAdapter<Task> = createEntityAdapter<Task>();
 
-const addObject = (state, task: Task) => {
-  const keys = Object.keys(state.tasks).reverse(); //.map(key => Number(key)).sort((a: number, b: number) => a - b).reverse();
-  const id = keys[0] ? `${Number(keys[0]) + 1}` : '0';
+export const initialState = adapter.getInitialState({
+  tasksLoaded: false,
+})
 
-
-  return Object.assign({}, state, {
-    tasksOrderIds: [...state.tasksOrderIds, id],
-    tasks: {
-      ...state.tasks,
-      [id]: {
-        'userId': 1,
-        'id': id,
-        'title': task.title,
-        'completed': false
-      }
-    }
-  });
-};
-
-export function taskReducer(state: TasksState = defaultState, action: Action) {
-  console.log({ action, type: action.type, state });
-
+export function tasksReducer(state: TaskState = initialState, action: actions.TasksActions) {
   switch (action.type) {
-    case TaskActions.ADD_TASK: {
-      return addObject(state, action.payload);
+    case actions.LOADED: {
+      return adapter.addMany(action.tasks, {
+        ...state, tasksLoaded: true
+      })
     }
-    case TaskActions.REMOVE_TASK: {
-      return '';
+
+    case actions.CREATE: {
+      return adapter.addOne(action.task, state);
     }
-    default: {
+    case actions.UPDATE: {
+      return adapter.updateOne({
+        id: action.payload.id,
+        changes: action.payload
+      }, state);
+    }
+
+    case actions.DELETE: {
+      return adapter.removeOne(action.id, state);
+    }
+    default:
       return state;
-    }
   }
 }
+export const { selectAll, selectIds } = adapter.getSelectors();
