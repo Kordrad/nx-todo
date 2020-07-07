@@ -1,3 +1,41 @@
 input[type="checkbox"] {
   margin-right: 20px;
 }
+
+.container {
+  margin-top: 5rem;
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+  text-align: center;
+
+  //&__header {
+  //  width: 100%;
+  //}
+  //
+  //&__input {
+  //  left: 50%;
+  //  transform: translateX(-50%);
+  //}
+}
+
+.tasks {
+  margin-top: 50px;
+  text-align: left;
+
+  &__header {
+    text-align: center;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__button{
+    transform: scale(0.75) translateY(-50%);
+    position: relative;
+    top: 50%;
+  }
+
+}

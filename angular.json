@@ -21,8 +21,14 @@
             "polyfills": "apps/todo/src/polyfills.ts",
             "tsConfig": "apps/todo/tsconfig.app.json",
             "aot": true,
-            "assets": ["apps/todo/src/favicon.ico", "apps/todo/src/assets"],
-            "styles": ["apps/todo/src/styles.scss"],
+            "assets": [
+              "apps/todo/src/favicon.ico",
+              "apps/todo/src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "apps/todo/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -80,7 +86,10 @@
               "apps/todo/tsconfig.app.json",
               "apps/todo/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/todo/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/todo/**/*"
+            ]
           }
         },
         "test": {
@@ -115,8 +124,13 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/todo-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/todo-e2e/**/*"]
+            "tsConfig": [
+              "apps/todo-e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/todo-e2e/**/*"
+            ]
           }
         }
       }
