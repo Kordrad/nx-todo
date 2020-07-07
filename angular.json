@@ -151,64 +151,32 @@
         }
       }
     },
-    "data-access-services-tasks": {
+    "todo-data-access-store": {
       "projectType": "library",
-      "root": "libs/data-access/services/tasks",
-      "sourceRoot": "libs/data-access/services/tasks/src",
+      "root": "libs/todo/data-access/store",
+      "sourceRoot": "libs/todo/data-access/store/src",
       "prefix": "todo-workspace",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "libs/data-access/services/tasks/tsconfig.lib.json",
-              "libs/data-access/services/tasks/tsconfig.spec.json"
+              "libs/todo/data-access/store/tsconfig.lib.json",
+              "libs/todo/data-access/store/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**",
-              "!libs/data-access/services/tasks/**/*"
+              "!libs/todo/data-access/store/**/*"
             ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/data-access/services/tasks/jest.config.js",
-            "tsConfig": "libs/data-access/services/tasks/tsconfig.spec.json",
+            "jestConfig": "libs/todo/data-access/store/jest.config.js",
+            "tsConfig": "libs/todo/data-access/store/tsconfig.spec.json",
             "passWithNoTests": true,
-            "setupFile": "libs/data-access/services/tasks/src/test-setup.ts"
-          }
-        }
-      },
-      "schematics": {
-        "@nrwl/angular:component": {
-          "style": "scss"
-        }
-      }
-    },
-    "data-access-store": {
-      "projectType": "library",
-      "root": "libs/data-access/store",
-      "sourceRoot": "libs/data-access/store/src",
-      "prefix": "todo-workspace",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/data-access/store/tsconfig.lib.json",
-              "libs/data-access/store/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/data-access/store/**/*"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/data-access/store/jest.config.js",
-            "tsConfig": "libs/data-access/store/tsconfig.spec.json",
-            "passWithNoTests": true,
-            "setupFile": "libs/data-access/store/src/test-setup.ts"
+            "setupFile": "libs/todo/data-access/store/src/test-setup.ts"
           }
         }
       },

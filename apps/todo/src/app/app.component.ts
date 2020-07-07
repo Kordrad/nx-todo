@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Task } from '@todo-workspace/domain/interfaces/data';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { TasksState } from './state/task';
-import { getAllTasks } from './state/+state/tasks.selectors';
-import * as taskActions from './state/+state/tasks.actions';
+import { TasksState, getAllTasks, taskActions } from '@todo-workspace/todo/data-access/store';
 
 
 @Component({

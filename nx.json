@@ -32,10 +32,7 @@
     "domain-interfaces-data": {
       "tags": []
     },
-    "data-access-services-tasks": {
-      "tags": []
-    },
-    "data-access-store": {
+    "todo-data-access-store": {
       "tags": []
     }
   }

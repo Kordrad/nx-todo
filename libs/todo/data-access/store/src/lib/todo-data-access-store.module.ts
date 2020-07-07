@@ -18,5 +18,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
   ],
   providers: [TaskService]
 })
-export class TaskModule {
+export class TodoDataAccessStoreModule {
 }
+
