@@ -1,4 +1,4 @@
-import { Task, TaskParameters } from '@todo-workspace/domain/interfaces/data';
+import { Task } from '@todo-workspace/domain/interfaces/data';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -20,7 +20,7 @@ export class TaskService {
     return this.http.get<Array<Task>>(this.url, { params: urlParams });
   }
 
-  createTask({ task }): Observable<Task> {
+  createTask({ payload: { task } }): Observable<Task> {
     return this.http.post<Task>(this.url, task);
   }
 

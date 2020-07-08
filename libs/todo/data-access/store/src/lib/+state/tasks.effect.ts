@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { TaskService } from '../services/task.service';
 import * as taskActions from './tasks.actions';
-import { concatMap, map, withLatestFrom } from 'rxjs/operators';
+import { concatMap, map } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { TaskState } from './tasks.reducer';
 
@@ -22,13 +22,12 @@ export class TasksEffect {
   @Effect({ dispatch: false })
   createTask$ = this.actions$.pipe(
     ofType(taskActions.CREATE),
-    withLatestFrom(this.store$),
-    concatMap((actionAndState) => {
-        const action = actionAndState[0];
-        const pageNumber = actionAndState[1]['tasks'].page;
-        if (pageNumber) {
-          this.store$.dispatch(new taskActions.Load({ _page: pageNumber }));
-        }
+    concatMap((action) => {
+      console.log(action)
+      const { _start, _limit } = action['task'];
+      if (_start && _limit) {
+        this.store$.dispatch(new taskActions.Load({ _start, _limit }));
+      }
         return this.taskService.createTask(action);
       }
     )
@@ -37,12 +36,10 @@ export class TasksEffect {
   @Effect({ dispatch: false })
   deleteTask$ = this.actions$.pipe(
     ofType(taskActions.DELETE),
-    withLatestFrom(this.store$),
-    concatMap((actionAndState) => {
-      const action = actionAndState[0];
-      const pageNumber = actionAndState[1]['tasks'].page;
-      if (pageNumber) {
-        this.store$.dispatch(new taskActions.Load({ _page: pageNumber }));
+    concatMap((action) => {
+      const { _start, _limit } = action['payload'];
+      if (_start && _limit) {
+        this.store$.dispatch(new taskActions.Load({ _start, _limit }));
       }
       return this.taskService.deleteTask(action);
     })
@@ -51,13 +48,7 @@ export class TasksEffect {
   @Effect({ dispatch: false })
   updateTask$ = this.actions$.pipe(
     ofType(taskActions.UPDATE),
-    withLatestFrom(this.store$),
-    concatMap((actionAndState) => {
-      const action = actionAndState[0];
-      const pageNumber = actionAndState[1]['tasks'].page;
-      if (pageNumber) {
-        this.store$.dispatch(new taskActions.Load({ _page: pageNumber }));
-      }
+    concatMap((action) => {
       return this.taskService.updateTask(action);
     })
   );

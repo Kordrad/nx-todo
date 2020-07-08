@@ -12,8 +12,3 @@ export const areTasksLoaded = createSelector(
   taskFeatureSelector,
   state => state.tasksLoaded
 );
-
-export const getPageNumber = createSelector(
-  taskFeatureSelector,
-  state => state.page
-)

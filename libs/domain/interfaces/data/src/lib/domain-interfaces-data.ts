@@ -6,7 +6,7 @@ export interface Task {
 }
 
 export interface TaskParameters {
-  _page?: string,
+  page?: number,
   _order?: 'asc' | 'desc',
   _sort?: string,
   _limit?: string

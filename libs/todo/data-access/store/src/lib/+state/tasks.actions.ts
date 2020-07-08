@@ -24,7 +24,7 @@ export class Loaded implements  Action {
 export class Create implements Action {
   readonly type = CREATE;
 
-  constructor(public task: any) {
+  constructor(public payload: {[kay: string]: any}) {
   }
 }
 
@@ -38,7 +38,7 @@ export class Update implements Action {
 export class Delete implements Action {
   readonly type = DELETE;
 
-  constructor(public id: string) {
+  constructor(public payload: {[kay: string]: any}) {
   }
 }
 

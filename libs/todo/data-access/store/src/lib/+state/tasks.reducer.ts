@@ -17,6 +17,7 @@ export const initialState = adapter.getInitialState({
 });
 
 export function tasksReducer(state: TaskState = initialState, action: actions.TasksActions) {
+  // console.log(action, state);
   switch (action.type) {
     case actions.LOAD: {
       return adapter.removeAll(state);
@@ -37,7 +38,7 @@ export function tasksReducer(state: TaskState = initialState, action: actions.Ta
     }
 
     case actions.DELETE: {
-      return adapter.removeOne(action.id, state);
+      return adapter.removeOne(action.payload.id, state);
     }
     default:
       return state;

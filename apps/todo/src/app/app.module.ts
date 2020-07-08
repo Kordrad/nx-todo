@@ -12,13 +12,16 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { AppRoutingModule } from './app-routing.module';
+import { TodoComponent } from './todo/todo.component';
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, TodoComponent],
   imports: [BrowserModule, HttpClientModule, FormsModule, TodoDataAccessStoreModule, EffectsModule.forRoot([]), StoreDevtoolsModule.instrument({
     maxAge: 25
-  }), BrowserAnimationsModule, MatSliderModule, MatInputModule, MatButtonModule, MatIconModule, MatCheckboxModule],
+  }), BrowserAnimationsModule, MatSliderModule, MatInputModule, MatButtonModule, MatIconModule, MatCheckboxModule, MatProgressSpinnerModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent]
 })
