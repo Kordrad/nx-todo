@@ -10,4 +10,5 @@ export interface TaskParameters {
   _order?: 'asc' | 'desc',
   _sort?: string,
   _limit?: string
+  _start?: string,
 }

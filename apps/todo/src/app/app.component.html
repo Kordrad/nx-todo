@@ -13,14 +13,14 @@
     </button>
   </mat-form-field>
 
-  <div *ngIf="pagination$ | async as p">
-    {{p | json}}
+  <div>
+    page: {{page}};
   </div>
 
   <div class="tasks">
     <h2 class="tasks__header">Things to do</h2>
     <ul class="tasks__list">
-      <li class="tasks__item" *ngFor="let task of task$ | async">
+      <li class="tasks__item" *ngFor="let task of list">
 
         <mat-checkbox class="example-margin" [checked]="task.completed" (click)="updateTask(task.id, !task.completed)">
           {{task.title}}
@@ -32,6 +32,13 @@
         </button>
       </li>
     </ul>
+    <section>
+      <div>
+        <button mat-stroked-button (click)="changePage(-1)" [disabled]="page<=1"><</button>
+        <button mat-stroked-button>{{page}}</button>
+        <button mat-stroked-button (click)="changePage(1)" [disabled]="!next">></button>
+      </div>
+    </section>
   </div>
 </div>
 

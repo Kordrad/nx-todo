@@ -14,22 +14,37 @@ export class AppComponent implements OnInit {
   header = 'To do list';
 
   task$: Observable<Task[]>;
-  prev$: Observable<Task[]>;
-  next$: Observable<Task[]>;
   pagination$: Observable<Number>;
-
-  // New Task
+  page = 1;
+  limit = 10;
+  list: Task[];
   title: string;
+  next = true;
 
   constructor(private store: Store<TasksState>) {
     this.task$ = this.store.select(getAllTasks);
-    this.prev$ = this.store.select(getAllTasks);
-    this.next$ = this.store.select(getAllTasks);
-    this.pagination$ = this.store.select(getPageNumber)
+    this.pagination$ = this.store.select(getPageNumber);
   }
 
   ngOnInit() {
-    this.store.dispatch(new taskActions.Load({_page: "20"}));
+    this.store.dispatch(new taskActions.Load({
+      _start: `${this.limit * this.page - this.limit}`,
+      _limit: `${this.limit + 1}`
+    }));
+
+    this.task$.subscribe((tasks) => {
+      if (tasks.length > 0) {
+        if (tasks.length === this.limit + 1) {
+          this.next = true;
+          tasks.pop();
+        } else {
+          this.next = false;
+        }
+        this.list = [...tasks];
+      } else {
+        this.next = false;
+      }
+    });
   }
 
   addTask() {
@@ -53,5 +68,13 @@ export class AppComponent implements OnInit {
 
   deleteTask(id: number) {
     this.store.dispatch(new taskActions.Delete(`${id}`));
+  }
+
+  changePage(value) {
+    this.page += value;
+    this.store.dispatch(new taskActions.Load({
+      _start: `${this.limit * this.page - this.limit}`,
+      _limit: `${this.limit + 1}`
+    }));
   }
 }
