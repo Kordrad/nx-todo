@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Task } from '@todo-workspace/domain/interfaces/data';
-import { Store } from '@ngrx/store';
-import { getAllTasks, taskActions, TaskState } from '@todo-workspace/todo/data-access/store';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { TasksFacade } from '@todo-workspace/todo/data-access/store';
 
 @Component({
   selector: 'todo-workspace-todo',
@@ -23,21 +22,21 @@ export class TodoComponent implements OnInit {
   next = true;
   prev = true;
 
-  constructor(private store: Store<TaskState>, private route: ActivatedRoute, private location: Location) {
-    this.task$ = this.store.select(getAllTasks);
+  constructor(private route: ActivatedRoute, private location: Location, private tasksFacade: TasksFacade) {
   }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.page = Number(params.get('page'));
     });
-    this.store.dispatch(new taskActions.Load({
-      _start: `${this.limit * this.page - this.limit}`,
-      _limit: `${this.limit + 1}`,
-      page: this.page
-    }));
 
-    this.task$.subscribe((tasks) => {
+    this.tasksFacade.loadTasks({
+      limit: this.limit,
+      page: this.page
+    });
+
+
+    this.tasksFacade.tasks$.subscribe((tasks) => {
       if (tasks.length > 0) {
         if (tasks.length === this.limit + 1) {
           this.next = true;
@@ -56,41 +55,31 @@ export class TodoComponent implements OnInit {
 
   addTask() {
     if (this.title) {
-      this.store.dispatch(new taskActions.Create({
-        task: {
-          'title': this.title,
-          'completed': false,
-          'userId': 1,
-          'id': new Date().valueOf()
-        },
-        _start: `${this.limit * this.page - this.limit}`,
-        _limit: `${this.limit + 1}`
-      }));
+      this.tasksFacade.addTask({
+        title: this.title,
+        page: this.page,
+        limit: this.limit
+      });
       this.title = '';
     }
   }
 
   updateTask(id: number, completed: boolean) {
-    this.store.dispatch(new taskActions.Update({
-      id,
-      completed
-    }));
+    this.tasksFacade.updateTask({
+      id, completed
+    });
   }
 
   deleteTask(id: number) {
-    this.store.dispatch(new taskActions.Delete({
-      id: `${id}`,
-      _start: `${this.limit * this.page - this.limit}`,
-      _limit: `${this.limit + 1}`
-    }));
+    this.tasksFacade.deleteTask({ id, limit: this.limit, page: this.page });
   }
 
   changePage(value) {
     this.page += value;
-    this.store.dispatch(new taskActions.Load({
-      _start: `${this.limit * this.page - this.limit}`,
-      _limit: `${this.limit + 1}`
-    }));
+    this.tasksFacade.getPage({
+      page: this.page,
+      limit: this.limit
+    });
     this.location.go('page/' + this.page);
   }
 }
