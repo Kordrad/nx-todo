@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Task } from '@todo-workspace/domain/interfaces/data';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { TasksState, getAllTasks, taskActions } from '@todo-workspace/todo/data-access/store';
+import { getAllTasks, getPageNumber, taskActions, TasksState } from '@todo-workspace/todo/data-access/store';
 
 
 @Component({
@@ -14,19 +14,22 @@ export class AppComponent implements OnInit {
   header = 'To do list';
 
   task$: Observable<Task[]>;
-  taskStore$: Observable<any[]>;
-
+  prev$: Observable<Task[]>;
+  next$: Observable<Task[]>;
+  pagination$: Observable<Number>;
 
   // New Task
   title: string;
 
   constructor(private store: Store<TasksState>) {
     this.task$ = this.store.select(getAllTasks);
-    this.taskStore$ = this.store.select('tasks');
+    this.prev$ = this.store.select(getAllTasks);
+    this.next$ = this.store.select(getAllTasks);
+    this.pagination$ = this.store.select(getPageNumber)
   }
 
   ngOnInit() {
-    this.store.dispatch(new taskActions.Load());
+    this.store.dispatch(new taskActions.Load({_page: "20"}));
   }
 
   addTask() {
@@ -43,8 +46,8 @@ export class AppComponent implements OnInit {
 
   updateTask(id: number, completed: boolean) {
     this.store.dispatch(new taskActions.Update({
-      id: id,
-      completed: completed,
+      id,
+      completed
     }));
   }
 

@@ -4,29 +4,40 @@ import { createEntityAdapter, EntityState, EntityAdapter } from '@ngrx/entity';
 
 export interface TaskState extends EntityState<Task>{
   tasksLoaded: boolean
+  page: number | undefined,
+  taskLength: number
 }
 
 export const adapter: EntityAdapter<Task> = createEntityAdapter<Task>();
 
 export const initialState = adapter.getInitialState({
   tasksLoaded: false,
+  page: undefined,
+  taskLength: 0,
 })
 
 export function tasksReducer(state: TaskState = initialState, action: actions.TasksActions) {
   switch (action.type) {
+    case actions.LOAD: {
+      return {
+        ...state,
+        page: action.params && action.params._page
+      }
+    }
+
     case actions.LOADED: {
       return adapter.addMany(action.tasks, {
-        ...state, tasksLoaded: true
+        ...state, tasksLoaded: true,
       })
     }
 
-    case actions.CREATE: {
-      return adapter.addOne(action.task, state);
-    }
+    // case actions.CREATE: {
+    //   // return adapter.addOne(action.task, state);
+    // }
     case actions.UPDATE: {
       return adapter.updateOne({
-        id: action.payload.id,
-        changes: action.payload
+        id: action.task.id,
+        changes: action.task
       }, state);
     }
 

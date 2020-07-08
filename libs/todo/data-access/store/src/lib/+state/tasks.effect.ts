@@ -2,44 +2,67 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { TaskService } from '../services/task.service';
 import * as taskActions from './tasks.actions';
-import { concatMap, map } from 'rxjs/operators';
-import { Task } from '@todo-workspace/domain/interfaces/data';
-
+import { concatMap, map, withLatestFrom } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { TaskState } from './tasks.reducer';
 
 @Injectable()
 export class TasksEffect {
   @Effect()
   loadTasks$ = this.actions$.pipe(
     ofType(taskActions.LOAD),
-    concatMap(() => {
-      return this.taskService.getAllTasks()
+    concatMap((params) => {
+      return this.taskService.getAllTasks(params);
     }),
     map(tasks => {
       return new taskActions.Loaded(tasks);
     })
   );
 
-  @Effect({dispatch: false})
+  @Effect({ dispatch: false })
   createTask$ = this.actions$.pipe(
     ofType(taskActions.CREATE),
-    concatMap((action) =>
-      this.taskService.createTask(action)
+    withLatestFrom(this.store$),
+    concatMap((actionAndState) => {
+        const action = actionAndState[0];
+        const pageNumber = actionAndState[1]['tasks'].page;
+        if (pageNumber) {
+          this.store$.dispatch(new taskActions.Load({ _page: pageNumber }));
+        }
+        return this.taskService.createTask(action);
+      }
     )
   );
 
-  @Effect({dispatch: false})
+  @Effect({ dispatch: false })
   deleteTask$ = this.actions$.pipe(
     ofType(taskActions.DELETE),
-    concatMap((id: string) => this.taskService.deleteTask(id))
-  )
+    withLatestFrom(this.store$),
+    concatMap((actionAndState) => {
+      const action = actionAndState[0];
+      const pageNumber = actionAndState[1]['tasks'].page;
+      if (pageNumber) {
+        this.store$.dispatch(new taskActions.Load({ _page: pageNumber }));
+      }
+      return this.taskService.deleteTask(action);
+    })
+  );
 
-  @Effect({dispatch: false})
+  @Effect({ dispatch: false })
   updateTask$ = this.actions$.pipe(
     ofType(taskActions.UPDATE),
-    concatMap((task: Task) => this.taskService.updateTask(task))
-  )
+    withLatestFrom(this.store$),
+    concatMap((actionAndState) => {
+      const action = actionAndState[0];
+      const pageNumber = actionAndState[1]['tasks'].page;
+      if (pageNumber) {
+        this.store$.dispatch(new taskActions.Load({ _page: pageNumber }));
+      }
+      return this.taskService.updateTask(action);
+    })
+  );
 
 
-  constructor(private taskService: TaskService, private actions$: Actions) {
+  constructor(private taskService: TaskService, private actions$: Actions, private store$: Store<TaskState>) {
   }
 }

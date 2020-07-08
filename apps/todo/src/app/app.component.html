@@ -13,6 +13,10 @@
     </button>
   </mat-form-field>
 
+  <div *ngIf="pagination$ | async as p">
+    {{p | json}}
+  </div>
+
   <div class="tasks">
     <h2 class="tasks__header">Things to do</h2>
     <ul class="tasks__list">
@@ -22,7 +26,8 @@
           {{task.title}}
         </mat-checkbox>
 
-        <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="deleteTask(task.id)" class="tasks__button">
+        <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="deleteTask(task.id)"
+                class="tasks__button">
           <mat-icon class="tasks__cross">close</mat-icon>
         </button>
       </li>

@@ -1,6 +1,6 @@
-import { Task } from '@todo-workspace/domain/interfaces/data';
+import { Task, TaskParameters } from '@todo-workspace/domain/interfaces/data';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 
@@ -9,21 +9,26 @@ export class TaskService {
   url = 'https://jsonplaceholder.typicode.com/todos/';
 
 
-  constructor(private http: HttpClient) {}
-
-  getAllTasks(): Observable<Task[]> {
-    return this.http.get<Task[]>(this.url);
+  constructor(private http: HttpClient) {
   }
 
-  createTask(task: Task): Observable<Task> {
+  getAllTasks({ params = {} }): Observable<Task[]> {
+    let urlParams = new HttpParams();
+    Object.keys(params).forEach((param) => {
+      urlParams = urlParams.set(param, params[param]);
+    });
+    return this.http.get<Array<Task>>(this.url, { params: urlParams });
+  }
+
+  createTask({ task }): Observable<Task> {
     return this.http.post<Task>(this.url, task);
   }
 
-  deleteTask(taskID: string): Observable<any> {
-    return this.http.delete(this.url + taskID);
+  deleteTask({ id }): Observable<any> {
+    return this.http.delete(this.url + id);
   }
 
-  updateTask(task: Partial<Task>): Observable<any> {
+  updateTask({ task }): Observable<any> {
     return this.http.put(this.url + task.id, task);
   }
 }
