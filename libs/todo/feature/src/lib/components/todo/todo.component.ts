@@ -11,16 +11,12 @@ import { TasksFacade } from '@todo-workspace/todo/data-access';
   styleUrls: ['./todo.component.scss']
 })
 export class TodoComponent implements OnInit {
-
-  header = 'To do list';
-
-  task$: Observable<Task[]>;
   page = 1;
   limit = 10;
   list: Task[];
-  title: string;
-  next = true;
-  prev = true;
+  disableNextBtn = false;
+  disablePrevBtn = false;
+
 
   constructor(private route: ActivatedRoute, private location: Location, private tasksFacade: TasksFacade) {
   }
@@ -39,45 +35,32 @@ export class TodoComponent implements OnInit {
     this.tasksFacade.tasks$.subscribe((tasks) => {
       if (tasks.length > 0) {
         if (tasks.length === this.limit + 1) {
-          this.next = true;
           tasks.pop();
-        } else {
-          this.next = false;
         }
-        this.prev = this.page !== 1;
         this.list = [...tasks];
-      } else {
-        this.prev = false;
-        this.next = false;
       }
     });
   }
 
-  addTask() {
-    if (this.title) {
-      this.tasksFacade.addTask({
-        title: this.title,
-      });
-      this.title = '';
-    }
+  addTask(title: string) {
+    this.tasksFacade.addTask({ title });
   }
 
-  updateTask(id: number, completed: boolean) {
-    this.tasksFacade.updateTask({
-      id, completed
-    });
-  }
-
-  deleteTask(id: number) {
-    this.tasksFacade.deleteTask({ id });
-  }
-
-  changePage(value) {
-    this.page += value;
+  onChangePage(value: number) {
+    this.page = value;
     this.tasksFacade.loadTasks({
       page: this.page,
       limit: this.limit
     });
     this.location.go('page/' + this.page);
   }
+
+  onDelete(id) {
+    this.tasksFacade.deleteTask({ id });
+  }
+
+  onChangeTask({ id, completed }) {
+    this.tasksFacade.updateTask({ id, completed });
+  }
+
 }

@@ -1,0 +1,13 @@
+<h1 class="container__header" *ngIf="header !== ''">{{header}}</h1>
+<mat-form-field class="container__input">
+  <mat-label>Type a new thing</mat-label>
+  <label>
+    <input matInput type="text" [(ngModel)]="_title">
+  </label>
+  <button mat-button *ngIf="_title" matSuffix mat-icon-button aria-label="Clear" (click)="_title=''">
+    <mat-icon>close</mat-icon>
+  </button>
+  <button mat-button *ngIf="_title" matSuffix mat-icon-button aria-label="Add" (click)="accept()">
+    <mat-icon>done</mat-icon>
+  </button>
+</mat-form-field>

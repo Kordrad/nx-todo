@@ -37,6 +37,15 @@
     },
     "todo-shell": {
       "tags": []
+    },
+    "todo-feature": {
+      "tags": []
+    },
+    "todo-ui-task-form": {
+      "tags": []
+    },
+    "todo-ui-task-list": {
+      "tags": []
     }
   }
 }

@@ -20,7 +20,14 @@
       "@todo-workspace/todo/data-access": [
         "libs/todo/data-access/src/index.ts"
       ],
-      "@todo-workspace/todo/shell": ["libs/todo/shell/src/index.ts"]
+      "@todo-workspace/todo/shell": ["libs/todo/shell/src/index.ts"],
+      "@todo-workspace/todo/feature": ["libs/todo/feature/src/index.ts"],
+      "@todo-workspace/todo/ui-task-form": [
+        "libs/todo/ui-task-form/src/index.ts"
+      ],
+      "@todo-workspace/todo/ui-task-list": [
+        "libs/todo/ui-task-list/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

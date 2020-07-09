@@ -219,6 +219,102 @@
           "style": "scss"
         }
       }
+    },
+    "todo-feature": {
+      "projectType": "library",
+      "root": "libs/todo/feature",
+      "sourceRoot": "libs/todo/feature/src",
+      "prefix": "todo-workspace",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/todo/feature/tsconfig.lib.json",
+              "libs/todo/feature/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/todo/feature/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/todo/feature/jest.config.js",
+            "tsConfig": "libs/todo/feature/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/todo/feature/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "todo-ui-task-form": {
+      "projectType": "library",
+      "root": "libs/todo/ui-task-form",
+      "sourceRoot": "libs/todo/ui-task-form/src",
+      "prefix": "todo-workspace",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/todo/ui-task-form/tsconfig.lib.json",
+              "libs/todo/ui-task-form/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/todo/ui-task-form/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/todo/ui-task-form/jest.config.js",
+            "tsConfig": "libs/todo/ui-task-form/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/todo/ui-task-form/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "todo-ui-task-list": {
+      "projectType": "library",
+      "root": "libs/todo/ui-task-list",
+      "sourceRoot": "libs/todo/ui-task-list/src",
+      "prefix": "todo-workspace",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/todo/ui-task-list/tsconfig.lib.json",
+              "libs/todo/ui-task-list/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/todo/ui-task-list/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/todo/ui-task-list/jest.config.js",
+            "tsConfig": "libs/todo/ui-task-list/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/todo/ui-task-list/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
     }
   },
   "cli": {
