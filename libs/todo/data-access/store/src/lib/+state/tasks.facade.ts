@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { areTasksLoaded, getAllTasks, taskActions, TaskState } from '@todo-workspace/todo/data-access/store';
+import { areTasksLoaded, getAllTasks } from './tasks.selectors';
+import { TaskState } from './tasks.reducer';
+import * as taskActions from './tasks.actions';
 
 @Injectable()
 export class TasksFacade {

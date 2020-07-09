@@ -1,21 +1,22 @@
 import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
-import { TaskService } from './services/task.service';
-import { TasksFacade } from './+state/tasks.facade';
-import { tasksReducer } from './+state/tasks.reducer';
 import { EffectsModule } from '@ngrx/effects';
-import { TasksEffect } from './+state/tasks.effect';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+// User imports
+import { TasksEffect } from './+state/tasks.effect';
+import { TASKS_FEATURE_KEY, tasksReducer } from './+state/tasks.reducer';
+import { TasksFacade } from './+state/tasks.facade';
+import { TaskService } from './services/task.service';
 
 @NgModule({
   imports: [
-    StoreModule.forRoot({
-      tasks: tasksReducer
-    }),
-    EffectsModule.forFeature([TasksEffect]),
-    StoreDevtoolsModule.instrument({
-      maxAge: 25 // Retains last 25 states
-    })
+    CommonModule,
+    StoreModule.forRoot({ [TASKS_FEATURE_KEY]: tasksReducer }),
+    EffectsModule.forRoot([TasksEffect]),
+    StoreDevtoolsModule.instrument({ maxAge: 25 }),
+    HttpClientModule
   ],
   providers: [TaskService, TasksFacade]
 })

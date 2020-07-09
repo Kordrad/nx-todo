@@ -1,11 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { TodoDataAccessStoreModule } from '@todo-workspace/todo/data-access/store';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatInputModule } from '@angular/material/input';
@@ -19,9 +16,19 @@ import { TodoComponent } from './todo/todo.component';
 
 @NgModule({
   declarations: [AppComponent, TodoComponent],
-  imports: [BrowserModule, HttpClientModule, FormsModule, TodoDataAccessStoreModule, EffectsModule.forRoot([]), StoreDevtoolsModule.instrument({
-    maxAge: 25
-  }), BrowserAnimationsModule, MatSliderModule, MatInputModule, MatButtonModule, MatIconModule, MatCheckboxModule, MatProgressSpinnerModule, AppRoutingModule],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    TodoDataAccessStoreModule,
+    BrowserAnimationsModule,
+    MatSliderModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCheckboxModule,
+    MatProgressSpinnerModule,
+    AppRoutingModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

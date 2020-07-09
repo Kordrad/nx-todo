@@ -2,6 +2,8 @@ import * as actions from './tasks.actions';
 import { Task } from '@todo-workspace/domain/interfaces/data';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
+export const TASKS_FEATURE_KEY = 'tasks';
+
 export interface TaskState extends EntityState<Task> {
   tasksLoaded: boolean
   page: number | undefined,
