@@ -16,17 +16,11 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@todo-workspace/domain/interfaces/data": [
-        "libs/domain/interfaces/data/src/index.ts"
-      ],
-      "@todo-workspace/data-access/services/tasks": [
-        "libs/data-access/services/tasks/src/index.ts"
-      ],
-      "@todo-workspace/data-access/store": [
-        "libs/data-access/store/src/index.ts"
-      ],
       "@todo-workspace/todo/data-access/store": [
         "libs/todo/data-access/store/src/index.ts"
+      ],
+      "@todo-workspace/todo/domian": [
+        "libs/todo/domian/src/index.ts"
       ]
     }
   },

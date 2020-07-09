@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Task, TaskParameters } from '@todo-workspace/domain/interfaces/data';
+import { Task, TaskParameters } from '@todo-workspace/todo/domian';
 
 export const CREATE = '[Task] Create';
 export const UPDATE = '[Task] Update';
@@ -31,7 +31,7 @@ export class Create implements Action {
 export class Update implements Action {
   readonly type = UPDATE;
 
-  constructor(public task: Task) {
+  constructor(public task: Partial<Task>) {
   }
 }
 

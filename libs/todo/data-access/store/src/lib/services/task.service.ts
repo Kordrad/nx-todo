@@ -1,4 +1,4 @@
-import { Task } from '@todo-workspace/domain/interfaces/data';
+import { Task } from '@todo-workspace/todo/domian';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
