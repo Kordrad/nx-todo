@@ -57,8 +57,6 @@ export class TodoComponent implements OnInit {
     if (this.title) {
       this.tasksFacade.addTask({
         title: this.title,
-        page: this.page,
-        limit: this.limit
       });
       this.title = '';
     }
@@ -71,12 +69,12 @@ export class TodoComponent implements OnInit {
   }
 
   deleteTask(id: number) {
-    this.tasksFacade.deleteTask({ id, limit: this.limit, page: this.page });
+    this.tasksFacade.deleteTask({ id });
   }
 
   changePage(value) {
     this.page += value;
-    this.tasksFacade.getPage({
+    this.tasksFacade.loadTasks({
       page: this.page,
       limit: this.limit
     });

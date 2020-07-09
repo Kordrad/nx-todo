@@ -23,9 +23,8 @@ export class TasksEffect {
   createTask$ = this.actions$.pipe(
     ofType(taskActions.CREATE),
     concatMap((action) => {
-      console.log(action)
-      const { _start, _limit } = action['task'];
-      if (_start && _limit) {
+      if (action['payload']['_start'] && action['payload']['_limit']) {
+        const { _start, _limit } = action['payload'];
         this.store$.dispatch(new taskActions.Load({ _start, _limit }));
       }
         return this.taskService.createTask(action);
