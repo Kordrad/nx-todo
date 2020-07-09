@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
-import { TodoDataAccessStoreModule } from '@todo-workspace/todo/data-access/store';
+import { TodoDataAccessModule } from '@todo-workspace/todo/data-access';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatInputModule } from '@angular/material/input';
@@ -19,7 +19,7 @@ import { TodoComponent } from './todo/todo.component';
   imports: [
     BrowserModule,
     FormsModule,
-    TodoDataAccessStoreModule,
+    TodoDataAccessModule,
     BrowserAnimationsModule,
     MatSliderModule,
     MatInputModule,

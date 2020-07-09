@@ -29,10 +29,10 @@
       "tags": [],
       "implicitDependencies": ["todo"]
     },
-    "todo-data-access-store": {
+    "todo-domian": {
       "tags": []
     },
-    "todo-domian": {
+    "todo-data-access": {
       "tags": []
     }
   }

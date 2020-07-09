@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Task } from '@todo-workspace/todo/domian';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { TasksFacade } from '@todo-workspace/todo/data-access/store';
+import { TasksFacade } from '@todo-workspace/todo/data-access';
 
 @Component({
   selector: 'todo-workspace-todo',

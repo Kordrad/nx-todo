@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 // User imports
 import { TasksEffect } from './+state/tasks.effect';
@@ -20,6 +20,5 @@ import { TaskService } from './services/task.service';
   ],
   providers: [TaskService, TasksFacade]
 })
-export class TodoDataAccessStoreModule {
+export class TodoDataAccessModule {
 }
-
