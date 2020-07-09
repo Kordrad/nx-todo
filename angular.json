@@ -124,29 +124,29 @@
         }
       }
     },
-    "todo-domian": {
+    "todo-domain": {
       "projectType": "library",
-      "root": "libs/todo/domian",
-      "sourceRoot": "libs/todo/domian/src",
+      "root": "libs/todo/domain",
+      "sourceRoot": "libs/todo/domain/src",
       "prefix": "todo-workspace",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "libs/todo/domian/tsconfig.lib.json",
-              "libs/todo/domian/tsconfig.spec.json"
+              "libs/todo/domain/tsconfig.lib.json",
+              "libs/todo/domain/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/todo/domian/**/*"]
+            "exclude": ["**/node_modules/**", "!libs/todo/domain/**/*"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/todo/domian/jest.config.js",
-            "tsConfig": "libs/todo/domian/tsconfig.spec.json",
+            "jestConfig": "libs/todo/domain/jest.config.js",
+            "tsConfig": "libs/todo/domain/tsconfig.spec.json",
             "passWithNoTests": true,
-            "setupFile": "libs/todo/domian/src/test-setup.ts"
+            "setupFile": "libs/todo/domain/src/test-setup.ts"
           }
         }
       },
@@ -179,6 +179,38 @@
             "tsConfig": "libs/todo/data-access/tsconfig.spec.json",
             "passWithNoTests": true,
             "setupFile": "libs/todo/data-access/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "todo-shell": {
+      "projectType": "library",
+      "root": "libs/todo/shell",
+      "sourceRoot": "libs/todo/shell/src",
+      "prefix": "todo-workspace",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/todo/shell/tsconfig.lib.json",
+              "libs/todo/shell/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/todo/shell/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/todo/shell/jest.config.js",
+            "tsConfig": "libs/todo/shell/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/todo/shell/src/test-setup.ts"
           }
         }
       },

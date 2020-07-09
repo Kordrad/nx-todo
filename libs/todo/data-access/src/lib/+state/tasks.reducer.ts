@@ -1,5 +1,5 @@
 import * as actions from './tasks.actions';
-import { Task } from '@todo-workspace/todo/domian';
+import { Task } from '@todo-workspace/todo/domain';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
 export const TASKS_FEATURE_KEY = 'tasks';

@@ -1,16 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { TasksComponent } from './containers/tasks/tasks.component'
 
 const routes: Routes = [
-  { path: '', redirectTo: 'page/1', pathMatch: 'full' }
+  { path: 'page/:page', component: TasksComponent }
 ];
 
 @NgModule({
   declarations: [],
   imports: [
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes)
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {
+export class TodoShellRoutingModule {
 }

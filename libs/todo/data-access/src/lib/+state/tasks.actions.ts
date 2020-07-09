@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Task, TaskParameters } from '@todo-workspace/todo/domian';
+import { Task, TaskParameters } from '@todo-workspace/todo/domain';
 
 export const CREATE = '[Task] Create';
 export const UPDATE = '[Task] Update';

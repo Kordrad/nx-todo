@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Task } from '@todo-workspace/todo/domian';
+import { Task } from '@todo-workspace/todo/domain';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { TasksFacade } from '@todo-workspace/todo/data-access';

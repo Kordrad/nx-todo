@@ -16,8 +16,11 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@todo-workspace/todo/domian": ["libs/todo/domian/src/index.ts"],
-      "@todo-workspace/todo/data-access": ["libs/todo/data-access/src/index.ts"]
+      "@todo-workspace/todo/domain": ["libs/todo/domain/src/index.ts"],
+      "@todo-workspace/todo/data-access": [
+        "libs/todo/data-access/src/index.ts"
+      ],
+      "@todo-workspace/todo/shell": ["libs/todo/shell/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

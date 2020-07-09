@@ -11,11 +11,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AppRoutingModule } from './app-routing.module';
-import { TodoComponent } from './todo/todo.component';
+import { TodoShellModule } from '@todo-workspace/todo/shell';
 
 
 @NgModule({
-  declarations: [AppComponent, TodoComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     FormsModule,
@@ -27,7 +27,8 @@ import { TodoComponent } from './todo/todo.component';
     MatIconModule,
     MatCheckboxModule,
     MatProgressSpinnerModule,
-    AppRoutingModule
+    AppRoutingModule,
+    TodoShellModule
   ],
   providers: [],
   bootstrap: [AppComponent]
