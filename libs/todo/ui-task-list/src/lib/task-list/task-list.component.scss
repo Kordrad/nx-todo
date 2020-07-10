@@ -7,6 +7,9 @@
     display: flex;
     justify-content: flex-end;
   }
+  &__spinner {
+    margin: 10px;
+  }
 }
 
 .list {

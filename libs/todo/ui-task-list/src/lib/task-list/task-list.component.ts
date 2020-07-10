@@ -12,6 +12,7 @@ export class TaskListComponent implements OnInit {
   @Input() disablePrevBtn = false;
   @Input() disableNextBtn = false;
   @Input() page = 1;
+  @Input() activeSpinner = false;
 
   @Output() changePage = new EventEmitter<number>();
   @Output() deleteTask = new EventEmitter<number>();
@@ -35,6 +36,5 @@ export class TaskListComponent implements OnInit {
 
   onDeleteTask(id: number) {
     this.deleteTask.emit(id);
-
   }
 }

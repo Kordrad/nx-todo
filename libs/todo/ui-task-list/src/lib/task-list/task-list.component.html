@@ -1,9 +1,7 @@
 <div class="tasks">
   <h2 class="tasks__header" *ngIf="header">{{header}}</h2>
 
-  <ul class="list"
-      *ngIf="disableNextBtn === false || disablePrevBtn ===false; else spinner"
-  >
+  <ul class="list" *ngIf="!!list; else notFound">
     <li class="list__item" *ngFor="let task of list">
       <mat-checkbox class="list__checkbox" [checked]="task.completed" (click)="onUpdateTask(task.id, !task.completed)">
         {{task.title}}
@@ -18,15 +16,16 @@
     </li>
   </ul>
 
-  <ng-template #spinner>
-    <mat-spinner class="tasks__spinner"></mat-spinner>
+  <ng-template #notFound>
+    <span>No tasks found :(</span>
   </ng-template>
 
 
   <div class="tasks__pagination">
-
+    <mat-spinner class="tasks__spinner" diameter="20"
+                 *ngIf="activeSpinner"></mat-spinner>
     <button mat-stroked-button aria-label="Add" (click)="onChangePage(-1)"
-            [disabled]="disableNextBtn">
+            [disabled]="disablePrevBtn">
       <mat-icon>keyboard_arrow_left</mat-icon>
     </button>
     <button mat-stroked-button>{{page}}</button>

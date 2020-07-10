@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Task } from '@todo-workspace/todo/domain';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
@@ -16,6 +15,7 @@ export class TodoComponent implements OnInit {
   list: Task[];
   disableNextBtn = false;
   disablePrevBtn = false;
+  spinner = false;
 
 
   constructor(private route: ActivatedRoute, private location: Location, private tasksFacade: TasksFacade) {
@@ -24,6 +24,11 @@ export class TodoComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.page = Number(params.get('page'));
+
+      if (this.page < 1) {
+        this.page = 1;
+        this.location.go('page/' + this.page);
+      }
     });
 
     this.tasksFacade.loadTasks({
@@ -33,12 +38,21 @@ export class TodoComponent implements OnInit {
 
 
     this.tasksFacade.tasks$.subscribe((tasks) => {
+      this.spinner = true;
+      this.disablePrevBtn = true;
       if (tasks.length > 0) {
+        this.disableNextBtn = true;
         if (tasks.length === this.limit + 1) {
           tasks.pop();
+          this.disableNextBtn = false;
         }
         this.list = [...tasks];
+        this.spinner = false;
+      } else {
+        this.disableNextBtn = true;
+        this.disablePrevBtn = true;
       }
+      this.disablePrevBtn = this.page <= 1;
     });
   }
 
