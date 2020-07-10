@@ -59,7 +59,7 @@ export class TodoComponent implements OnInit {
     this.tasksFacade.deleteTask({ id });
   }
 
-  onChangeTask({ id, completed }) {
+  onChangeTask({ id, completed }: Partial<Task>) {
     this.tasksFacade.updateTask({ id, completed });
   }
 

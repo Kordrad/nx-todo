@@ -1,0 +1,18 @@
+.tasks {
+  &__header {
+    text-align: center;
+  }
+
+  &__pagination {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.list {
+  &__item {
+   display: grid;
+    grid-template-columns: 1fr 40px;
+
+  }
+}

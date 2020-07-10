@@ -1,16 +1,19 @@
 <div class="tasks">
   <h2 class="tasks__header" *ngIf="header">{{header}}</h2>
 
-  <ul class="tasks__list" *ngIf="disableNextBtn === false || disablePrevBtn ===false; else spinner">
-    <li class="tasks__item" *ngFor="let task of list">
-
-      <mat-checkbox class="example-margin" [checked]="task.completed" (click)="onUpdateTask(task.id, !task.completed)">
+  <ul class="list"
+      *ngIf="disableNextBtn === false || disablePrevBtn ===false; else spinner"
+  >
+    <li class="list__item" *ngFor="let task of list">
+      <mat-checkbox class="list__checkbox" [checked]="task.completed" (click)="onUpdateTask(task.id, !task.completed)">
         {{task.title}}
       </mat-checkbox>
-
-      <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="onDeleteTask(task.id)"
-              class="tasks__button">
-        <mat-icon class="tasks__cross">close</mat-icon>
+      <button
+        mat-button matSuffix mat-icon-button
+        class="list__button" aria-label="Clear"
+        (click)="onDeleteTask(task.id)"
+      >
+        <mat-icon>close</mat-icon>
       </button>
     </li>
   </ul>
@@ -18,18 +21,19 @@
   <ng-template #spinner>
     <mat-spinner class="tasks__spinner"></mat-spinner>
   </ng-template>
-  <section>
-    <div>
 
-      <button mat-stroked-button aria-label="Add" (click)="onChangePage(-1)"
-              [disabled]="disableNextBtn">
-        <mat-icon>keyboard_arrow_left</mat-icon>
-      </button>
-      <button mat-stroked-button>{{page}}</button>
-      <button mat-stroked-button aria-label="Add" (click)="onChangePage(1)"
-              [disabled]="disableNextBtn">
-        <mat-icon>keyboard_arrow_right</mat-icon>
-      </button>
-    </div>
-  </section>
+
+  <div class="tasks__pagination">
+
+    <button mat-stroked-button aria-label="Add" (click)="onChangePage(-1)"
+            [disabled]="disableNextBtn">
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
+    <button mat-stroked-button>{{page}}</button>
+    <button mat-stroked-button aria-label="Add" (click)="onChangePage(1)"
+            [disabled]="disableNextBtn">
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </button>
+  </div>
+
 </div>

@@ -1,15 +1,17 @@
-<todo-workspace-task-form
-  [header]="'ToDo List'"
-  (done)="addTask($event)"
-></todo-workspace-task-form>
+<div class="tasks">
+  <todo-workspace-task-form
+    [header]="'ToDo List'"
+    (done)="addTask($event)"
+  ></todo-workspace-task-form>
 
-<todo-workspace-task-list
-  [header]="'Things to do'"
-  [list]="list"
-  [page]="page"
-  [disablePrevBtn]="disablePrevBtn"
-  [disableNextBtn]="disableNextBtn"
-  (changePage)="onChangePage($event)"
-  (deleteTask)="onDelete($event)"
-  (toggleTask)="onChangeTask($event)"
-></todo-workspace-task-list>
+  <todo-workspace-task-list
+    [header]="'Things to do'"
+    [list]="list"
+    [page]="page"
+    [disablePrevBtn]="disablePrevBtn"
+    [disableNextBtn]="disableNextBtn"
+    (changePage)="onChangePage($event)"
+    (deleteTask)="onDelete($event)"
+    (toggleTask)="onChangeTask($event)"
+  ></todo-workspace-task-list>
+</div>
