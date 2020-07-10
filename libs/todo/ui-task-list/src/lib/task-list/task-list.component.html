@@ -1,12 +1,12 @@
 <div class="tasks">
-  <h2 class="tasks__header" *ngIf="header">{{ header }}</h2>
+  <h2 *ngIf="header" class="tasks__header">{{ header }}</h2>
 
-  <ul class="list" *ngIf="!!list; else notFound">
-    <li class="list__item" *ngFor="let task of list; trackBy: trackByFn">
+  <ul *ngIf="!!list; else notFound" class="list">
+    <li *ngFor="let task of list; trackBy: trackByFn" class="list__item">
       <mat-checkbox
-        class="list__checkbox"
         [checked]="task.completed"
         (click)="onUpdateTask(task.id, !task.completed)"
+        class="list__checkbox"
       >
         {{ task.title }}
       </mat-checkbox>
@@ -29,24 +29,24 @@
 
   <div class="tasks__pagination">
     <mat-spinner
+      *ngIf="activeSpinner"
       class="tasks__spinner"
       diameter="20"
-      *ngIf="activeSpinner"
     ></mat-spinner>
     <button
-      mat-stroked-button
-      aria-label="Add"
       (click)="onChangePage(-1)"
       [disabled]="disablePrevBtn"
+      mat-stroked-button
+      aria-label="Add"
     >
       <mat-icon>keyboard_arrow_left</mat-icon>
     </button>
     <button mat-stroked-button>{{ page }}</button>
     <button
-      mat-stroked-button
-      aria-label="Add"
       (click)="onChangePage(1)"
       [disabled]="disableNextBtn"
+      mat-stroked-button
+      aria-label="Add"
     >
       <mat-icon>keyboard_arrow_right</mat-icon>
     </button>

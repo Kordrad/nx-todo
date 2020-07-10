@@ -1,5 +1,5 @@
 <div class="form">
-  <h1 class="form__header" *ngIf="header !== ''">{{ header }}</h1>
+  <h1 *ngIf="header !== ''" class="form__header">{{ header }}</h1>
   <mat-form-field class="form__input">
     <mat-label>Type a new thing</mat-label>
     <label>
@@ -7,8 +7,8 @@
     </label>
     <button
       *ngIf="title"
-      aria-label="Clear"
       (click)="clearInput()"
+      aria-label="Clear"
       mat-button
       mat-icon-button
       matSuffix
@@ -17,8 +17,8 @@
     </button>
     <button
       *ngIf="title"
-      aria-label="Add"
       (click)="accept()"
+      aria-label="Add"
       mat-button
       mat-icon-button
       matSuffix

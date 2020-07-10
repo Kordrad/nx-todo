@@ -1,11 +1,11 @@
 <div class="tasks">
   <todo-workspace-task-form
-    [header]="'ToDo List'"
+    header="ToDo List"
     (done)="addTask($event)"
   ></todo-workspace-task-form>
 
   <todo-workspace-task-list
-    [header]="'Things to do'"
+    header="Things to do"
     [list]="list"
     [page]="page"
     [disablePrevBtn]="disablePrevBtn"
