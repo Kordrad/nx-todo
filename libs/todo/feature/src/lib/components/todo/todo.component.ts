@@ -5,7 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { Task } from '@todo-workspace/todo/domain';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { TasksFacade } from '@todo-workspace/todo/data-access';
 import { Observable } from 'rxjs';
@@ -26,7 +26,7 @@ export class TodoComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private location: Location,
+    private router: Router,
     private tasksFacade: TasksFacade,
     private cdref: ChangeDetectorRef
   ) {}
@@ -34,16 +34,9 @@ export class TodoComponent implements OnInit {
   ngOnInit() {
     this.tasks$ = this.tasksFacade.tasks$;
     this.tasksLoaded$ = this.tasksFacade.tasksLoaded$;
+    this.page = Number(this.route.snapshot.paramMap.get('page'));
 
-    this.route.paramMap.subscribe((params) => {
-      this.page = Number(params.get('page'));
-
-      if (this.page < 1) {
-        this.page = 1;
-        this.location.go('page/' + this.page);
-      }
-    });
-
+    this.goToPage(this.page);
     this.loadTasks();
   }
 
@@ -65,7 +58,14 @@ export class TodoComponent implements OnInit {
       page: this.page,
       limit: this.limit,
     });
-    this.location.go('page/' + this.page);
+    this.goToPage(this.page);
+  }
+
+  goToPage(number) {
+    if (number < 1) {
+      number = 1;
+    }
+    this.router.navigate(['/page', number], { relativeTo: this.route });
   }
 
   onDelete(id) {
