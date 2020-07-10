@@ -4,16 +4,10 @@ import { NgModule } from '@angular/core';
 import { TodoDataAccessModule } from '@todo-workspace/todo/data-access';
 import { TodoShellModule } from '@todo-workspace/todo/shell';
 
-
 @NgModule({
   declarations: [AppComponent],
-  imports: [
-    AppRoutingModule,
-    TodoDataAccessModule,
-    TodoShellModule
-  ],
+  imports: [AppRoutingModule, TodoDataAccessModule, TodoShellModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}

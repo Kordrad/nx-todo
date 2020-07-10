@@ -16,11 +16,10 @@ import { TaskListComponent } from './task-list/task-list.component';
     MatCheckboxModule,
     MatIconModule,
     MatInputModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
   ],
   declarations: [TaskListComponent],
   exports: [TaskListComponent],
-  entryComponents: [TaskListComponent]
+  entryComponents: [TaskListComponent],
 })
-export class TodoUiTaskListModule {
-}
+export class TodoUiTaskListModule {}

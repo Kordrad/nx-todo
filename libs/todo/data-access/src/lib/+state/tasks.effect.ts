@@ -14,7 +14,7 @@ export class TasksEffect {
     concatMap((params) => {
       return this.taskService.getAllTasks(params);
     }),
-    map(tasks => {
+    map((tasks) => {
       return new taskActions.Loaded(tasks);
     })
   );
@@ -27,9 +27,8 @@ export class TasksEffect {
         const { _start, _limit } = action['payload'];
         this.store$.dispatch(new taskActions.Load({ _start, _limit }));
       }
-        return this.taskService.createTask(action);
-      }
-    )
+      return this.taskService.createTask(action);
+    })
   );
 
   @Effect({ dispatch: false })
@@ -52,7 +51,9 @@ export class TasksEffect {
     })
   );
 
-
-  constructor(private taskService: TaskService, private actions$: Actions, private store$: Store<TaskState>) {
-  }
+  constructor(
+    private taskService: TaskService,
+    private actions$: Actions,
+    private store$: Store<TaskState>
+  ) {}
 }

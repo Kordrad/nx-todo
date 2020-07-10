@@ -16,9 +16,8 @@ import { TaskService } from './services/task.service';
     StoreModule.forRoot({ [TASKS_FEATURE_KEY]: tasksReducer }),
     EffectsModule.forRoot([TasksEffect]),
     StoreDevtoolsModule.instrument({ maxAge: 25 }),
-    HttpClientModule
+    HttpClientModule,
   ],
-  providers: [TaskService, TasksFacade]
+  providers: [TaskService, TasksFacade],
 })
-export class TodoDataAccessModule {
-}
+export class TodoDataAccessModule {}

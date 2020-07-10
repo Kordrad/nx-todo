@@ -1,14 +1,28 @@
 <div class="form">
-  <h1 class="form__header" *ngIf="header !== ''">{{header}}</h1>
+  <h1 class="form__header" *ngIf="header !== ''">{{ header }}</h1>
   <mat-form-field class="form__input">
     <mat-label>Type a new thing</mat-label>
     <label>
-      <input matInput type="text" [(ngModel)]="_title">
+      <input matInput type="text" [(ngModel)]="_title" />
     </label>
-    <button mat-button *ngIf="_title" matSuffix mat-icon-button aria-label="Clear" (click)="_title=''">
+    <button
+      *ngIf="_title"
+      aria-label="Clear"
+      (click)="_title = ''"
+      mat-button
+      mat-icon-button
+      matSuffix
+    >
       <mat-icon>close</mat-icon>
     </button>
-    <button mat-button *ngIf="_title" matSuffix mat-icon-button aria-label="Add" (click)="accept()">
+    <button
+      *ngIf="_title"
+      aria-label="Add"
+      (click)="accept()"
+      mat-button
+      mat-icon-button
+      matSuffix
+    >
       <mat-icon>done</mat-icon>
     </button>
   </mat-form-field>

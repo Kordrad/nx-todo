@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+} from '@angular/core';
 import { Task } from '@todo-workspace/todo/domain';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
@@ -8,7 +13,7 @@ import { TasksFacade } from '@todo-workspace/todo/data-access';
   selector: 'todo-workspace-todo',
   templateUrl: './todo.component.html',
   styleUrls: ['./todo.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TodoComponent implements OnInit {
   page = 1;
@@ -18,17 +23,15 @@ export class TodoComponent implements OnInit {
   disablePrevBtn = false;
   spinner = false;
 
-
   constructor(
     private route: ActivatedRoute,
     private location: Location,
     private tasksFacade: TasksFacade,
     private _cdref: ChangeDetectorRef
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params) => {
       this.page = Number(params.get('page'));
 
       if (this.page < 1) {
@@ -39,7 +42,7 @@ export class TodoComponent implements OnInit {
 
     this.tasksFacade.loadTasks({
       limit: this.limit,
-      page: this.page
+      page: this.page,
     });
 
     this.tasksFacade.tasks$.subscribe((tasks) => {
@@ -58,7 +61,7 @@ export class TodoComponent implements OnInit {
         this.disablePrevBtn = true;
       }
       this.disablePrevBtn = this.page <= 1;
-      this._cdref.markForCheck()
+      this._cdref.markForCheck();
     });
   }
 
@@ -70,7 +73,7 @@ export class TodoComponent implements OnInit {
     this.page = value;
     this.tasksFacade.loadTasks({
       page: this.page,
-      limit: this.limit
+      limit: this.limit,
     });
     this.location.go('page/' + this.page);
   }
@@ -82,5 +85,4 @@ export class TodoComponent implements OnInit {
   onChangeTask({ id, completed }: Partial<Task>) {
     this.tasksFacade.updateTask({ id, completed });
   }
-
 }

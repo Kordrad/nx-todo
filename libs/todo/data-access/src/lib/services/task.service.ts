@@ -3,14 +3,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-
 @Injectable()
 export class TaskService {
   url = 'https://jsonplaceholder.typicode.com/todos/';
 
-
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   getAllTasks({ params = {} }): Observable<Task[]> {
     let urlParams = new HttpParams();

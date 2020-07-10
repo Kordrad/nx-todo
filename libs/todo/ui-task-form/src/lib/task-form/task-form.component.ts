@@ -1,10 +1,16 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 
 @Component({
   selector: 'todo-workspace-task-form',
   templateUrl: './task-form.component.html',
   styleUrls: ['./task-form.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskFormComponent {
   @Input() header = '';
@@ -12,13 +18,10 @@ export class TaskFormComponent {
 
   _title = '';
 
-  constructor() {
-  }
+  constructor() {}
 
   accept() {
     this.done.emit(this._title);
     this._title = '';
   }
-
-
 }

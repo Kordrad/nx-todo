@@ -12,46 +12,53 @@ export class TasksFacade {
   private _page = 1;
   private _limit = 10;
 
-  constructor(private store: Store<TaskState>) {
-  }
+  constructor(private store: Store<TaskState>) {}
 
   loadTasks({ limit = this._limit, page = this._page }) {
-    this.store.dispatch(new taskActions.Load({
-      _start: `${limit * page - limit}`,
-      _limit: `${limit + 1}`
-    }));
+    this.store.dispatch(
+      new taskActions.Load({
+        _start: `${limit * page - limit}`,
+        _limit: `${limit + 1}`,
+      })
+    );
     this._limit = limit;
     this._page = page;
   }
 
   addTask({ title, limit = this._limit, page = this._page }) {
-    this.store.dispatch(new taskActions.Create({
-      task: {
-        'title': title,
-        'completed': false,
-        'userId': 1,
-        'id': new Date().valueOf()
-      },
-      _start: `${limit * page - limit}`,
-      _limit: `${limit + 1}`
-    }));
+    this.store.dispatch(
+      new taskActions.Create({
+        task: {
+          title: title,
+          completed: false,
+          userId: 1,
+          id: new Date().valueOf(),
+        },
+        _start: `${limit * page - limit}`,
+        _limit: `${limit + 1}`,
+      })
+    );
     this._limit = limit;
     this._page = page;
   }
 
   updateTask({ id, completed }) {
-    this.store.dispatch(new taskActions.Update({
-      id,
-      completed
-    }));
+    this.store.dispatch(
+      new taskActions.Update({
+        id,
+        completed,
+      })
+    );
   }
 
   deleteTask({ id, limit = this._limit, page = this._page }) {
-    this.store.dispatch(new taskActions.Delete({
-      id: `${id}`,
-      _start: `${limit * page - limit}`,
-      _limit: `${limit + 1}`
-    }));
+    this.store.dispatch(
+      new taskActions.Delete({
+        id: `${id}`,
+        _start: `${limit * page - limit}`,
+        _limit: `${limit + 1}`,
+      })
+    );
     this._limit = limit;
     this._page = page;
   }

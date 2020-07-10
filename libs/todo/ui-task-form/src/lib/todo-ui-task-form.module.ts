@@ -7,10 +7,15 @@ import { NgModule } from '@angular/core';
 import { TaskFormComponent } from './task-form/task-form.component';
 
 @NgModule({
-  imports: [CommonModule, MatInputModule, MatIconModule, FormsModule, MatButtonModule],
+  imports: [
+    CommonModule,
+    MatInputModule,
+    MatIconModule,
+    FormsModule,
+    MatButtonModule,
+  ],
   declarations: [TaskFormComponent],
   exports: [TaskFormComponent],
-  entryComponents: [TaskFormComponent]
+  entryComponents: [TaskFormComponent],
 })
-export class TodoUiTaskFormModule {
-}
+export class TodoUiTaskFormModule {}
