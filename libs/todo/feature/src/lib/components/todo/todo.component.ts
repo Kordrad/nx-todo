@@ -21,8 +21,8 @@ export class TodoComponent implements OnInit {
   limit = 10;
   disableNextBtn = false;
   disablePrevBtn = false;
-  spinner = false;
   tasks$: Observable<Task[]>;
+  tasksLoaded$: Observable<boolean>;
 
   constructor(
     private route: ActivatedRoute,
@@ -33,6 +33,8 @@ export class TodoComponent implements OnInit {
 
   ngOnInit() {
     this.tasks$ = this.tasksFacade.tasks$;
+    this.tasksLoaded$ = this.tasksFacade.tasksLoaded$;
+
     this.route.paramMap.subscribe((params) => {
       this.page = Number(params.get('page'));
 

@@ -19,7 +19,7 @@ export class TaskListComponent {
   @Input() disablePrevBtn = false;
   @Input() disableNextBtn = false;
   @Input() page = 1;
-  @Input() activeSpinner = false;
+  @Input() disableSpinner = true;
 
   @Output() changePage = new EventEmitter<number>();
   @Output() deleteTask = new EventEmitter<number>();

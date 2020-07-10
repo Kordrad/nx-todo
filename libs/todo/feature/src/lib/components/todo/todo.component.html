@@ -3,14 +3,13 @@
     header="ToDo List"
     (done)="addTask($event)"
   ></todo-workspace-task-form>
-
   <todo-workspace-task-list
     header="Things to do"
     [list]="tasks$ | async"
     [page]="page"
     [disablePrevBtn]="disablePrevBtn"
     [disableNextBtn]="disableNextBtn"
-    [activeSpinner]="spinner"
+    [disableSpinner]="tasksLoaded$ | async"
     (changePage)="onChangePage($event)"
     (deleteTask)="onDelete($event)"
     (toggleTask)="onChangeTask($event)"
