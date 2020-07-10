@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { TaskService } from '../services/task.service';
-import * as taskActions from './tasks.actions';
+import { tasksActions } from './tasks.actions';
 import { concatMap, map } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { TaskState } from './tasks.reducer';
@@ -10,22 +10,22 @@ import { TaskState } from './tasks.reducer';
 export class TasksEffect {
   @Effect()
   loadTasks$ = this.actions$.pipe(
-    ofType(taskActions.LOAD),
+    ofType(tasksActions.Types.LoadTask),
     concatMap((params) => {
       return this.taskService.getAllTasks(params);
     }),
     map((tasks) => {
-      return new taskActions.Loaded(tasks);
+      return new tasksActions.Loaded(tasks);
     })
   );
 
   @Effect({ dispatch: false })
   createTask$ = this.actions$.pipe(
-    ofType(taskActions.CREATE),
+    ofType(tasksActions.Types.CreateTask),
     concatMap((action) => {
       if (action['payload']['_start'] && action['payload']['_limit']) {
         const { _start, _limit } = action['payload'];
-        this.store$.dispatch(new taskActions.Load({ _start, _limit }));
+        this.store$.dispatch(new tasksActions.Load({ _start, _limit }));
       }
       return this.taskService.createTask(action);
     })
@@ -33,11 +33,11 @@ export class TasksEffect {
 
   @Effect({ dispatch: false })
   deleteTask$ = this.actions$.pipe(
-    ofType(taskActions.DELETE),
+    ofType(tasksActions.Types.DeleteTask),
     concatMap((action) => {
       const { _start, _limit } = action['payload'];
       if (_start && _limit) {
-        this.store$.dispatch(new taskActions.Load({ _start, _limit }));
+        this.store$.dispatch(new tasksActions.Load({ _start, _limit }));
       }
       return this.taskService.deleteTask(action);
     })
@@ -45,7 +45,7 @@ export class TasksEffect {
 
   @Effect({ dispatch: false })
   updateTask$ = this.actions$.pipe(
-    ofType(taskActions.UPDATE),
+    ofType(tasksActions.Types.UpdateTask),
     concatMap((action) => {
       return this.taskService.updateTask(action);
     })

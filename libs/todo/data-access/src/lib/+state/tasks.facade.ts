@@ -2,32 +2,32 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { areTasksLoaded, getAllTasks } from './tasks.selectors';
 import { TaskState } from './tasks.reducer';
-import * as taskActions from './tasks.actions';
+import { tasksActions } from './tasks.actions';
 
 @Injectable()
 export class TasksFacade {
   tasks$ = this.store.select(getAllTasks);
   tasksLoaded$ = this.store.select(areTasksLoaded);
 
-  private _page = 1;
-  private _limit = 10;
+  private page = 1;
+  private limit = 10;
 
   constructor(private store: Store<TaskState>) {}
 
-  loadTasks({ limit = this._limit, page = this._page }) {
+  loadTasks({ limit = this.limit, page = this.page }) {
     this.store.dispatch(
-      new taskActions.Load({
+      new tasksActions.Load({
         _start: `${limit * page - limit}`,
         _limit: `${limit + 1}`,
       })
     );
-    this._limit = limit;
-    this._page = page;
+    this.limit = limit;
+    this.page = page;
   }
 
-  addTask({ title, limit = this._limit, page = this._page }) {
+  addTask({ title, limit = this.limit, page = this.page }) {
     this.store.dispatch(
-      new taskActions.Create({
+      new tasksActions.Create({
         task: {
           title: title,
           completed: false,
@@ -38,28 +38,28 @@ export class TasksFacade {
         _limit: `${limit + 1}`,
       })
     );
-    this._limit = limit;
-    this._page = page;
+    this.limit = limit;
+    this.page = page;
   }
 
   updateTask({ id, completed }) {
     this.store.dispatch(
-      new taskActions.Update({
+      new tasksActions.Update({
         id,
         completed,
       })
     );
   }
 
-  deleteTask({ id, limit = this._limit, page = this._page }) {
+  deleteTask({ id, limit = this.limit, page = this.page }) {
     this.store.dispatch(
-      new taskActions.Delete({
+      new tasksActions.Delete({
         id: `${id}`,
         _start: `${limit * page - limit}`,
         _limit: `${limit + 1}`,
       })
     );
-    this._limit = limit;
-    this._page = page;
+    this.limit = limit;
+    this.page = page;
   }
 }

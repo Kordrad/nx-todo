@@ -1,4 +1,4 @@
-import * as actions from './tasks.actions';
+import { tasksActions } from './tasks.actions';
 import { Task } from '@todo-workspace/todo/domain';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
@@ -20,22 +20,22 @@ export const initialState = adapter.getInitialState({
 
 export function tasksReducer(
   state: TaskState = initialState,
-  action: actions.TasksActions
+  action: tasksActions.TaskType
 ) {
   // console.log(action, state);
   switch (action.type) {
-    case actions.LOAD: {
-      return adapter.removeAll(state);
+    case tasksActions.Types.LoadTask: {
+      return adapter.removeAll({ ...state, tasksLoaded: false });
     }
 
-    case actions.LOADED: {
+    case tasksActions.Types.LoadTaskSuccess: {
       return adapter.addMany(action.tasks, {
         ...state,
         tasksLoaded: true,
       });
     }
 
-    case actions.UPDATE: {
+    case tasksActions.Types.UpdateTask: {
       return adapter.updateOne(
         {
           id: action.task.id,
@@ -45,7 +45,7 @@ export function tasksReducer(
       );
     }
 
-    case actions.DELETE: {
+    case tasksActions.Types.DeleteTask: {
       return adapter.removeOne(action.payload.id, state);
     }
     default:
