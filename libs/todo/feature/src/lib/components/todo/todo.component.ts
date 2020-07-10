@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Task } from '@todo-workspace/todo/domain';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
@@ -7,7 +7,8 @@ import { TasksFacade } from '@todo-workspace/todo/data-access';
 @Component({
   selector: 'todo-workspace-todo',
   templateUrl: './todo.component.html',
-  styleUrls: ['./todo.component.scss']
+  styleUrls: ['./todo.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodoComponent implements OnInit {
   page = 1;
@@ -18,7 +19,12 @@ export class TodoComponent implements OnInit {
   spinner = false;
 
 
-  constructor(private route: ActivatedRoute, private location: Location, private tasksFacade: TasksFacade) {
+  constructor(
+    private route: ActivatedRoute,
+    private location: Location,
+    private tasksFacade: TasksFacade,
+    private _cdref: ChangeDetectorRef
+  ) {
   }
 
   ngOnInit() {
@@ -36,7 +42,6 @@ export class TodoComponent implements OnInit {
       page: this.page
     });
 
-
     this.tasksFacade.tasks$.subscribe((tasks) => {
       this.spinner = true;
       this.disablePrevBtn = true;
@@ -53,6 +58,7 @@ export class TodoComponent implements OnInit {
         this.disablePrevBtn = true;
       }
       this.disablePrevBtn = this.page <= 1;
+      this._cdref.markForCheck()
     });
   }
 
