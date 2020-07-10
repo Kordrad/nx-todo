@@ -2,7 +2,7 @@
   <h2 class="tasks__header" *ngIf="header">{{ header }}</h2>
 
   <ul class="list" *ngIf="!!list; else notFound">
-    <li class="list__item" *ngFor="let task of list">
+    <li class="list__item" *ngFor="let task of list; trackBy: trackByFn">
       <mat-checkbox
         class="list__checkbox"
         [checked]="task.completed"

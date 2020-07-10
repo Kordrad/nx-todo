@@ -38,4 +38,8 @@ export class TaskListComponent {
   onDeleteTask(id: number) {
     this.deleteTask.emit(id);
   }
+
+  trackByFn(index, item) {
+    return item.id
+  }
 }
