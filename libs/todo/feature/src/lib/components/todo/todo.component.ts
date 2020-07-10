@@ -27,7 +27,7 @@ export class TodoComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     private tasksFacade: TasksFacade,
-    private _cdref: ChangeDetectorRef
+    private cdref: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -61,7 +61,7 @@ export class TodoComponent implements OnInit {
         this.disablePrevBtn = true;
       }
       this.disablePrevBtn = this.page <= 1;
-      this._cdref.markForCheck();
+      this.cdref.markForCheck();
     });
   }
 
