@@ -3,7 +3,6 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnInit,
   Output,
 } from '@angular/core';
 import { Task } from '@todo-workspace/todo/domain';
@@ -14,7 +13,7 @@ import { Task } from '@todo-workspace/todo/domain';
   styleUrls: ['./task-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TaskListComponent implements OnInit {
+export class TaskListComponent {
   @Input() header = '';
   @Input() list: Task[];
   @Input() disablePrevBtn = false;
@@ -27,10 +26,6 @@ export class TaskListComponent implements OnInit {
   @Output() toggleTask = new EventEmitter<Partial<Task>>();
 
   limit = 10;
-
-  constructor() {}
-
-  ngOnInit(): void {}
 
   onChangePage(number: number) {
     this.changePage.emit(this.page + number);
