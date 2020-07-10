@@ -6,7 +6,7 @@
 
   <todo-workspace-task-list
     header="Things to do"
-    [list]="list"
+    [list]="tasks$ | async"
     [page]="page"
     [disablePrevBtn]="disablePrevBtn"
     [disableNextBtn]="disableNextBtn"

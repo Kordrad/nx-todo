@@ -9,23 +9,18 @@ export class TasksFacade {
   tasks$ = this.store.select(getAllTasks);
   tasksLoaded$ = this.store.select(areTasksLoaded);
 
-  private page = 1;
-  private limit = 10;
-
   constructor(private store: Store<TaskState>) {}
 
-  loadTasks({ limit = this.limit, page = this.page }) {
+  loadTasks({ limit, page }) {
     this.store.dispatch(
       new tasksActions.Load({
         _start: `${limit * page - limit}`,
         _limit: `${limit + 1}`,
       })
     );
-    this.limit = limit;
-    this.page = page;
   }
 
-  addTask({ title, limit = this.limit, page = this.page }) {
+  addTask({ title, limit, page }) {
     this.store.dispatch(
       new tasksActions.Create({
         task: {
@@ -38,8 +33,6 @@ export class TasksFacade {
         _limit: `${limit + 1}`,
       })
     );
-    this.limit = limit;
-    this.page = page;
   }
 
   updateTask({ id, completed }) {
@@ -51,7 +44,7 @@ export class TasksFacade {
     );
   }
 
-  deleteTask({ id, limit = this.limit, page = this.page }) {
+  deleteTask({ id, limit, page }) {
     this.store.dispatch(
       new tasksActions.Delete({
         id: `${id}`,
@@ -59,7 +52,5 @@ export class TasksFacade {
         _limit: `${limit + 1}`,
       })
     );
-    this.limit = limit;
-    this.page = page;
   }
 }
