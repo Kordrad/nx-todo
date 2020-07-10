@@ -1,21 +1,16 @@
-.tasks {
-  &__header {
-    text-align: center;
-  }
-
-  &__pagination {
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  &__spinner {
-    margin: 10px;
-  }
+.tasks__header {
+  text-align: center;
 }
 
-.list {
-  &__item {
-    display: grid;
-    grid-template-columns: 1fr 40px;
-  }
+.tasks__pagination {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.tasks__spinner {
+  margin: 10px;
+}
+.list__item {
+  display: grid;
+  grid-template-columns: 1fr 40px;
 }

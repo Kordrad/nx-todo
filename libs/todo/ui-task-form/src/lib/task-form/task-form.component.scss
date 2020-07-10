@@ -1,13 +1,13 @@
 .form {
   margin-bottom: 50px;
+}
 
-  &__header {
-    text-align: center;
-  }
+.form__header {
+  text-align: center;
+}
 
-  &__input {
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-  }
+.form__input {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 }
