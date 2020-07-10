@@ -16,12 +16,16 @@ export class TaskFormComponent {
   @Input() header = '';
   @Output() done = new EventEmitter<string>();
 
-  _title = '';
+  title = '';
 
   constructor() {}
 
   accept() {
-    this.done.emit(this._title);
-    this._title = '';
+    this.done.emit(this.title);
+    this.clearInput()
+  }
+
+  clearInput() {
+    this.title = '';
   }
 }
