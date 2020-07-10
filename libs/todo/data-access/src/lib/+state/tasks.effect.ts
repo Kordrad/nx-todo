@@ -5,17 +5,23 @@ import { tasksActions } from './tasks.actions';
 import { concatMap, map } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { TaskState } from './tasks.reducer';
+import { fetch, optimisticUpdate, pessimisticUpdate } from '@nrwl/angular';
 
 @Injectable()
 export class TasksEffect {
   @Effect()
   loadTasks$ = this.actions$.pipe(
     ofType(tasksActions.Types.LoadTask),
-    concatMap((params) => {
-      return this.taskService.getAllTasks(params);
-    }),
-    map((tasks) => {
-      return new tasksActions.Loaded(tasks);
+    fetch({
+      run: (action) => {
+        return this.taskService
+          .getAllTasks(action)
+          .pipe(map((data) => new tasksActions.Loaded(data)));
+      },
+      onError: (action: any, error: any) => {
+        console.error(error);
+        return null;
+      },
     })
   );
 
