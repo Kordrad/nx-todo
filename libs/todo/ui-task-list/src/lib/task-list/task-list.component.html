@@ -5,7 +5,7 @@
     <li *ngFor="let task of list; trackBy: trackByFn" class="list__item">
       <mat-checkbox
         [checked]="task.completed"
-        (click)="onUpdateTask(task.id, !task.completed)"
+        (change)="onUpdateTask($event, task.id)"
         class="list__checkbox"
       >
         {{ task.title }}

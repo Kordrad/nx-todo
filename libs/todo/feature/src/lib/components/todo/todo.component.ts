@@ -47,7 +47,7 @@ export class TodoComponent implements OnInit {
     this.cdref.markForCheck();
   }
 
-  addTask({title}) {
+  addTask({ title }) {
     this.tasksFacade.addTask({ title, page: this.page, limit: this.limit });
   }
 

@@ -31,8 +31,8 @@ export class TaskListComponent {
     this.changePage.emit(this.page + number);
   }
 
-  onUpdateTask(id: number, completed?: boolean) {
-    this.toggleTask.emit({ id, completed });
+  onUpdateTask({ checked }, id) {
+    this.toggleTask.emit({ id, completed: checked });
   }
 
   onDeleteTask(id: number) {
