@@ -4,7 +4,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class TaskService {
+export class TaskDataService {
   url = 'https://jsonplaceholder.typicode.com/todos/';
 
   constructor(private http: HttpClient) {}

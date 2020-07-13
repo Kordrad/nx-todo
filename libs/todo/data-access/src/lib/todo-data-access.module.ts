@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TasksEffect } from './+state/tasks.effect';
 import { TASKS_FEATURE_KEY, tasksReducer } from './+state/tasks.reducer';
 import { TasksFacade } from './+state/tasks.facade';
-import { TaskService } from './services/task.service';
+import { TaskDataService } from './services/task-data.service';
 
 @NgModule({
   imports: [
@@ -18,6 +18,6 @@ import { TaskService } from './services/task.service';
     StoreDevtoolsModule.instrument({ maxAge: 25 }),
     HttpClientModule,
   ],
-  providers: [TaskService, TasksFacade],
+  providers: [TaskDataService, TasksFacade],
 })
 export class TodoDataAccessModule {}

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { TaskService } from '../services/task.service';
+import { TaskDataService } from '../services/task-data.service';
 import { tasksActions } from './tasks.actions';
 import { concatMap, map } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
@@ -14,7 +14,7 @@ export class TasksEffect {
     ofType(tasksActions.Types.LoadTask),
     fetch({
       run: (action) => {
-        return this.taskService
+        return this.taskDataService
           .getAllTasks(action)
           .pipe(map((data) => new tasksActions.Loaded(data)));
       },
@@ -33,7 +33,7 @@ export class TasksEffect {
         const { _start, _limit } = action['payload'];
         this.store$.dispatch(new tasksActions.Load({ _start, _limit }));
       }
-      return this.taskService.createTask(action);
+      return this.taskDataService.createTask(action);
     })
   );
 
@@ -45,7 +45,7 @@ export class TasksEffect {
       if (_start && _limit) {
         this.store$.dispatch(new tasksActions.Load({ _start, _limit }));
       }
-      return this.taskService.deleteTask(action);
+      return this.taskDataService.deleteTask(action);
     })
   );
 
@@ -53,12 +53,12 @@ export class TasksEffect {
   updateTask$ = this.actions$.pipe(
     ofType(tasksActions.Types.UpdateTask),
     concatMap((action) => {
-      return this.taskService.updateTask(action);
+      return this.taskDataService.updateTask(action);
     })
   );
 
   constructor(
-    private taskService: TaskService,
+    private taskDataService: TaskDataService,
     private actions$: Actions,
     private store$: Store<TaskState>
   ) {}
