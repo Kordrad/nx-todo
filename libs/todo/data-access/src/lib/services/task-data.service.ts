@@ -6,20 +6,12 @@ import { urlFactory } from '@valueadd/typed-urls';
 
 @Injectable()
 export class TaskDataService {
+  apiUrl = 'https://jsonplaceholder.typicode.com/todos/';
   readonly endpoints = {
-    getAllTasks: urlFactory(
-      'https://jsonplaceholder.typicode.com/todos/?_page=:_page&_limit=:_limit',
-      true
-    ),
-    createTask: urlFactory('https://jsonplaceholder.typicode.com/todos/?:id'),
-    deleteTask: urlFactory<'id'>(
-      'https://jsonplaceholder.typicode.com/todos/:id',
-      true
-    ),
-    updateTask: urlFactory<'id'>(
-      'https://jsonplaceholder.typicode.com/todos/:id',
-      true
-    ),
+    getAllTasks: urlFactory(this.apiUrl + '?_page=:_page&_limit=:_limit', true),
+    createTask: urlFactory(this.apiUrl + ':id'),
+    deleteTask: urlFactory<'id'>(this.apiUrl + ':id', true),
+    updateTask: urlFactory<'id'>(this.apiUrl + ':id', true),
   };
 
   constructor(private http: HttpClient) {}
@@ -32,11 +24,11 @@ export class TaskDataService {
     return this.http.post<Task>(this.endpoints.createTask.url(), task);
   }
 
-  deleteTask({ payload: {id} } ): Observable<any> {
+  deleteTask({ payload: { id } }): Observable<any> {
     return this.http.delete(this.endpoints.deleteTask.url({ id }));
   }
 
-  updateTask({ task } ): Observable<any> {
+  updateTask({ task }): Observable<any> {
     return this.http.put(this.endpoints.updateTask.url({ id: task.id }), task);
   }
 }
