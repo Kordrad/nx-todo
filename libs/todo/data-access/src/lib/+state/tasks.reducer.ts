@@ -22,7 +22,6 @@ export function tasksReducer(
   state: TaskState = initialState,
   action: tasksActions.TaskType
 ) {
-  // console.log(action, state);
   switch (action.type) {
     case tasksActions.Types.LoadTask: {
       return adapter.removeAll({ ...state, tasksLoaded: false });

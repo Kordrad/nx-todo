@@ -49,7 +49,6 @@ export class TodoComponent implements OnInit {
   }
 
   addTask({title}) {
-    console.log(title)
     this.tasksFacade.addTask({ title, page: this.page, limit: this.limit });
   }
 
