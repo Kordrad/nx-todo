@@ -23,29 +23,29 @@
   },
   "projects": {
     "todo": {
-      "tags": []
+      "tags": ["type:application"]
     },
     "todo-e2e": {
       "tags": [],
       "implicitDependencies": ["todo"]
     },
     "todo-domain": {
-      "tags": []
+      "tags": ["type:domain"]
     },
     "todo-data-access": {
-      "tags": []
+      "tags": ["type:data-access"]
     },
     "todo-shell": {
-      "tags": []
+      "tags": ["type:shell"]
     },
     "todo-feature": {
-      "tags": []
+      "tags": ["type:feature"]
     },
     "todo-ui-task-form": {
-      "tags": []
+      "tags": ["type:ui"]
     },
     "todo-ui-task-list": {
-      "tags": []
+      "tags": ["type:ui"]
     }
   }
 }
