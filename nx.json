@@ -30,22 +30,22 @@
       "implicitDependencies": ["todo"]
     },
     "todo-domain": {
-      "tags": ["type:domain"]
+      "tags": ["type:domain", "scope:todo"]
     },
     "todo-data-access": {
-      "tags": ["type:data-access"]
+      "tags": ["type:data-access", "scope:todo"]
     },
     "todo-shell": {
-      "tags": ["type:shell"]
+      "tags": ["type:shell", "scope:todo"]
     },
     "todo-feature": {
-      "tags": ["type:feature"]
+      "tags": ["type:feature", "scope:todo"]
     },
     "todo-ui-task-form": {
-      "tags": ["type:ui"]
+      "tags": ["type:ui", "scope:todo"]
     },
     "todo-ui-task-list": {
-      "tags": ["type:ui"]
+      "tags": ["type:ui", "scope:todo"]
     }
   }
 }
