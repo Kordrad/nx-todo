@@ -1,7 +1,9 @@
-import { selectAll, TaskState } from './tasks.reducer';
+import { selectAll, TaskState, TASKS_FEATURE_KEY } from './tasks.reducer';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-export const taskFeatureSelector = createFeatureSelector<TaskState>('tasks');
+export const taskFeatureSelector = createFeatureSelector<TaskState>(
+  TASKS_FEATURE_KEY
+);
 
 export const getAllTasks = createSelector(taskFeatureSelector, selectAll);
 
