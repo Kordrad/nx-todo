@@ -7,7 +7,6 @@ import { TodoShellModule } from '@todo-workspace/todo/shell';
 @NgModule({
   declarations: [AppComponent],
   imports: [AppRoutingModule, TodoDataAccessModule, TodoShellModule],
-  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
