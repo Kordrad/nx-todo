@@ -3,8 +3,10 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnInit,
   Output,
 } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'todo-workspace-task-form',
@@ -12,20 +14,26 @@ import {
   styleUrls: ['./task-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TaskFormComponent {
+export class TaskFormComponent implements OnInit {
   @Input() header = '';
   @Output() done = new EventEmitter<string>();
+  taskForm: FormGroup;
 
-  title = '';
+  constructor(private fb: FormBuilder) {}
 
-  constructor() {}
-
-  accept() {
-    this.done.emit(this.title);
-    this.clearInput()
+  ngOnInit() {
+    this.taskForm = this.fb.group({
+      title: ['', [Validators.required, Validators.minLength(3)]],
+    });
   }
 
-  clearInput() {
-    this.title = '';
+  onSubmit(form) {
+    // stop here if form is invalid
+    if (form.invalid) {
+      return;
+    }
+    this.done.emit(form.value);
+    this.taskForm.reset();
+
   }
 }

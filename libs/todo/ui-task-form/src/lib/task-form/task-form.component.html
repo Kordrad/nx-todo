@@ -1,13 +1,15 @@
-<div class="form">
+<form [formGroup]="taskForm" (ngSubmit)="onSubmit(taskForm)" class="form">
   <h1 *ngIf="header !== ''" class="form__header">{{ header }}</h1>
   <mat-form-field class="form__input">
     <mat-label>Type a new thing</mat-label>
     <label>
-      <input matInput type="text" [(ngModel)]="title" />
+      <input matInput type="text" formControlName="title" />
     </label>
+
+
     <button
-      *ngIf="title"
-      (click)="clearInput()"
+      *ngIf="taskForm.value.title"
+      type="reset"
       aria-label="Clear"
       mat-button
       mat-icon-button
@@ -16,8 +18,8 @@
       <mat-icon>close</mat-icon>
     </button>
     <button
-      *ngIf="title"
-      (click)="accept()"
+      *ngIf="taskForm.value.title"
+      type="submit"
       aria-label="Add"
       mat-button
       mat-icon-button
@@ -26,4 +28,4 @@
       <mat-icon>done</mat-icon>
     </button>
   </mat-form-field>
-</div>
+</form>
