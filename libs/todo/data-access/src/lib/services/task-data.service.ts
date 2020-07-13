@@ -1,31 +1,42 @@
 import { Task } from '@todo-workspace/todo/domain';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { urlFactory } from '@valueadd/typed-urls';
 
 @Injectable()
 export class TaskDataService {
-  url = 'https://jsonplaceholder.typicode.com/todos/';
+  readonly endpoints = {
+    getAllTasks: urlFactory(
+      'https://jsonplaceholder.typicode.com/todos/?_page=:_page&_limit=:_limit',
+      true
+    ),
+    createTask: urlFactory('https://jsonplaceholder.typicode.com/todos/?:id'),
+    deleteTask: urlFactory<'id'>(
+      'https://jsonplaceholder.typicode.com/todos/:id',
+      true
+    ),
+    updateTask: urlFactory<'id'>(
+      'https://jsonplaceholder.typicode.com/todos/:id',
+      true
+    ),
+  };
 
   constructor(private http: HttpClient) {}
 
   getAllTasks({ params = {} }): Observable<Task[]> {
-    let urlParams = new HttpParams();
-    Object.keys(params).forEach((param) => {
-      urlParams = urlParams.set(param, params[param]);
-    });
-    return this.http.get<Array<Task>>(this.url, { params: urlParams });
+    return this.http.get<Array<Task>>(this.endpoints.getAllTasks.url(params));
   }
 
   createTask({ payload: { task } }): Observable<Task> {
-    return this.http.post<Task>(this.url, task);
+    return this.http.post<Task>(this.endpoints.createTask.url(), task);
   }
 
-  deleteTask({ id }): Observable<any> {
-    return this.http.delete(this.url + id);
+  deleteTask({ payload: {id} } ): Observable<any> {
+    return this.http.delete(this.endpoints.deleteTask.url({ id }));
   }
 
-  updateTask({ task }): Observable<any> {
-    return this.http.put(this.url + task.id, task);
+  updateTask({ task } ): Observable<any> {
+    return this.http.put(this.endpoints.updateTask.url({ id: task.id }), task);
   }
 }
