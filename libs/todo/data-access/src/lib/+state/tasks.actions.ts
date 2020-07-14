@@ -19,7 +19,9 @@ export namespace tasksActions {
   export class Loaded implements Action {
     readonly type = Types.LoadTaskSuccess;
 
-    constructor(public tasks: Task[]) {}
+    constructor(
+      public payload: { tasks: Task[]; limit: number; page: number }
+    ) {}
   }
 
   export class Create implements Action {

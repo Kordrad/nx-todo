@@ -18,10 +18,11 @@ import { Observable } from 'rxjs';
 export class TodoComponent implements OnInit {
   page = 1;
   limit = 10;
-  disableNextBtn = false;
-  disablePrevBtn = false;
+  nextBtn$: Observable<boolean>;
+  prevBtn$: Observable<boolean>;
   tasks$: Observable<Task[]>;
   tasksLoaded$: Observable<boolean>;
+  tasksListProperties$: Observable<object>;
 
   constructor(
     private route: ActivatedRoute,
@@ -33,10 +34,17 @@ export class TodoComponent implements OnInit {
   ngOnInit() {
     this.tasks$ = this.tasksFacade.tasks$;
     this.tasksLoaded$ = this.tasksFacade.tasksLoaded$;
-    this.page = Number(this.route.snapshot.paramMap.get('page'));
+    this.nextBtn$ = this.tasksFacade.nextPageStatus$;
+    this.prevBtn$ = this.tasksFacade.prevPageStatus$;
 
-    this.goToPage(this.page);
+    this.setPage();
     this.loadTasks();
+  }
+
+  setPage() {
+    this.page = Number(this.route.snapshot.paramMap.get('page'));
+    this.page = this.page >= 1 ? this.page : (this.page = 1);
+    this.goToPage(this.page);
   }
 
   loadTasks() {

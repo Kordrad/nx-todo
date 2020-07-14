@@ -11,3 +11,13 @@ export const areTasksLoaded = createSelector(
   taskFeatureSelector,
   (state) => state.tasksLoaded
 );
+
+export const getNextPageStatus = createSelector(
+  taskFeatureSelector,
+  (state) => state.nextPage
+);
+
+export const getPrevPageStatus = createSelector(
+  taskFeatureSelector,
+  (state) => state.prevPage
+);

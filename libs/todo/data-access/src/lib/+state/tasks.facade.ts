@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { areTasksLoaded, getAllTasks } from './tasks.selectors';
+import {
+  areTasksLoaded,
+  getAllTasks,
+  getPrevPageStatus,
+  getNextPageStatus,
+} from './tasks.selectors';
 import { TaskState } from './tasks.reducer';
 import { tasksActions } from './tasks.actions';
 
@@ -8,6 +13,8 @@ import { tasksActions } from './tasks.actions';
 export class TasksFacade {
   tasks$ = this.store.select(getAllTasks);
   tasksLoaded$ = this.store.select(areTasksLoaded);
+  nextPageStatus$ = this.store.select(getNextPageStatus);
+  prevPageStatus$ = this.store.select(getPrevPageStatus);
 
   constructor(private store: Store<TaskState>) {}
 
@@ -16,6 +23,7 @@ export class TasksFacade {
       new tasksActions.Load({
         _start: `${limit * page - limit}`,
         _limit: `${limit + 1}`,
+        page,
       })
     );
   }
@@ -31,6 +39,7 @@ export class TasksFacade {
         },
         _start: `${limit * page - limit}`,
         _limit: `${limit + 1}`,
+        page,
       })
     );
   }
@@ -50,6 +59,7 @@ export class TasksFacade {
         id: `${id}`,
         _start: `${limit * page - limit}`,
         _limit: `${limit + 1}`,
+        page,
       })
     );
   }

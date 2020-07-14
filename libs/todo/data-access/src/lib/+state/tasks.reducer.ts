@@ -6,16 +6,20 @@ export const TASKS_FEATURE_KEY = 'tasks';
 
 export interface TaskState extends EntityState<Task> {
   tasksLoaded: boolean;
-  page: number | undefined;
-  taskLength: number;
+  limit: number;
+  nextPage: boolean;
+  prevPage: boolean;
+  page: number;
 }
 
 export const adapter: EntityAdapter<Task> = createEntityAdapter<Task>();
 
 export const initialState = adapter.getInitialState({
   tasksLoaded: false,
-  page: undefined,
-  taskLength: 0,
+  limit: 0,
+  nextPage: false,
+  prevPage: false,
+  page: 1,
 });
 
 export function tasksReducer(
@@ -28,8 +32,24 @@ export function tasksReducer(
     }
 
     case tasksActions.Types.LoadTaskSuccess: {
-      return adapter.addMany(action.tasks, {
+      const { tasks, limit, page } = action.payload;
+      let tasksList = [...tasks];
+      let nextPage = false;
+      let prevPage = false;
+
+      if (tasksList.length === limit + 1) {
+        tasksList.pop();
+        nextPage = true;
+      }
+      if (page > 1) {
+        prevPage = true;
+      }
+      return adapter.addMany(tasksList, {
         ...state,
+        limit,
+        nextPage,
+        prevPage,
+        page: page || state.page,
         tasksLoaded: true,
       });
     }
