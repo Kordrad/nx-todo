@@ -13,14 +13,13 @@ export class TasksEffect {
   loadTasks$ = this.actions$.pipe(
     ofType(tasksActions.Types.LoadTask),
     fetch({
-      run: (action) => {
+      run: (action: tasksActions.Load) => {
         return this.taskDataService
-          .getAllTasks(action)
+          .getAllTasks(action.params)
           .pipe(map((data) => new tasksActions.Loaded(data)));
       },
       onError: (action: any, error: any) => {
-        console.error(error);
-        return null;
+        return error;
       },
     })
   );
@@ -28,32 +27,32 @@ export class TasksEffect {
   @Effect({ dispatch: false })
   createTask$ = this.actions$.pipe(
     ofType(tasksActions.Types.CreateTask),
-    concatMap((action) => {
-      if (action['payload']['_start'] && action['payload']['_limit']) {
-        const { _start, _limit } = action['payload'];
+    concatMap((action: tasksActions.Create) => {
+      if (action.payload._start && action.payload._limit) {
+        const { _start, _limit } = action.payload;
         this.store$.dispatch(new tasksActions.Load({ _start, _limit }));
       }
-      return this.taskDataService.createTask(action);
+      return this.taskDataService.createTask(action.payload.task);
     })
   );
 
   @Effect({ dispatch: false })
   deleteTask$ = this.actions$.pipe(
     ofType(tasksActions.Types.DeleteTask),
-    concatMap((action) => {
+    concatMap((action: tasksActions.Delete) => {
       const { _start, _limit } = action['payload'];
       if (_start && _limit) {
         this.store$.dispatch(new tasksActions.Load({ _start, _limit }));
       }
-      return this.taskDataService.deleteTask(action);
+      return this.taskDataService.deleteTask(action.payload.id);
     })
   );
 
   @Effect({ dispatch: false })
   updateTask$ = this.actions$.pipe(
     ofType(tasksActions.Types.UpdateTask),
-    concatMap((action) => {
-      return this.taskDataService.updateTask(action);
+    concatMap((action: tasksActions.Update) => {
+      return this.taskDataService.updateTask(action.task);
     })
   );
 
