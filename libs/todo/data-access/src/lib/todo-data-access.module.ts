@@ -13,8 +13,8 @@ import { TaskDataService } from './services/task-data.service';
 @NgModule({
   imports: [
     CommonModule,
-    StoreModule.forRoot({ [TASKS_FEATURE_KEY]: tasksReducer }),
-    EffectsModule.forRoot([TasksEffect]),
+    StoreModule.forFeature(TASKS_FEATURE_KEY, tasksReducer),
+    EffectsModule.forFeature([TasksEffect]),
     StoreDevtoolsModule.instrument({ maxAge: 25 }),
     HttpClientModule,
   ],
