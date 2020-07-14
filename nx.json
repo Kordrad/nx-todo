@@ -46,6 +46,9 @@
     },
     "todo-ui-task-list": {
       "tags": ["type:ui", "scope:todo"]
+    },
+    "shared-domain": {
+      "tags": ["type:domain", "scope:shared"]
     }
   }
 }
