@@ -22,7 +22,6 @@ export class TodoComponent implements OnInit {
   prevBtn$: Observable<boolean>;
   tasks$: Observable<Task[]>;
   tasksLoaded$: Observable<boolean>;
-  tasksListProperties$: Observable<object>;
 
   constructor(
     private route: ActivatedRoute,
