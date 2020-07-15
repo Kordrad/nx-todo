@@ -36,12 +36,13 @@ export function tasksReducer(
       let tasksList = [...tasks];
       let nextPage = false;
       let prevPage = false;
+      const currentPage = page || state.page;
 
       if (tasksList.length === limit + 1) {
         tasksList.pop();
         nextPage = true;
       }
-      if (page > 1) {
+      if (currentPage > 1 ) {
         prevPage = true;
       }
       return adapter.addMany(tasksList, {
@@ -49,7 +50,7 @@ export function tasksReducer(
         limit,
         nextPage,
         prevPage,
-        page: page || state.page,
+        page: currentPage,
         tasksLoaded: true,
       });
     }
