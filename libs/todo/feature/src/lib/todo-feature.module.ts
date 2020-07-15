@@ -6,11 +6,8 @@ import { TodoUiTaskListModule } from '@todo-workspace/todo/ui-task-list';
 
 @NgModule({
   imports: [CommonModule, TodoUiTaskFormModule, TodoUiTaskListModule],
-  declarations: [TodoComponent, TodoComponent],
-  exports: [
-    TodoComponent
-  ],
+  declarations: [TodoComponent],
+  exports: [TodoComponent],
   entryComponents: [TodoComponent],
 })
-export class TodoFeatureModule {
-}
+export class TodoFeatureModule {}

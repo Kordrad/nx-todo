@@ -20,6 +20,6 @@ import { apiUrl } from '@todo-workspace/todo/domain';
     StoreDevtoolsModule.instrument({ maxAge: 25 }),
   ],
   bootstrap: [AppComponent],
-  providers: [{provide: apiUrl, useValue: environment.apiURL}]
+  providers: [{ provide: apiUrl, useValue: environment.apiURL }],
 })
 export class AppModule {}

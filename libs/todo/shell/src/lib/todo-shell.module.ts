@@ -5,17 +5,8 @@ import { TasksComponent } from './containers/tasks/tasks.component';
 import { TodoFeatureModule } from '@todo-workspace/todo/feature';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    TodoShellRoutingModule,
-    TodoFeatureModule
-  ],
-  exports: [
-    TodoShellRoutingModule
-  ],
-  declarations: [
-    TasksComponent,
-  ]
+  imports: [CommonModule, TodoShellRoutingModule, TodoFeatureModule],
+  exports: [TodoShellRoutingModule],
+  declarations: [TasksComponent],
 })
-export class TodoShellModule {
-}
+export class TodoShellModule {}
