@@ -10,7 +10,7 @@ import { TodoUiTaskListModule } from '@todo-workspace/todo/ui-task-list';
   exports: [
     TodoComponent
   ],
-  entryComponents: [TodoComponent]
+  entryComponents: [TodoComponent],
 })
 export class TodoFeatureModule {
 }

@@ -1,31 +1,43 @@
-import { TestBed, async } from '@angular/core/testing';
+import {
+  async,
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
+import { Location } from '@angular/common';
+import { DebugElement } from '@angular/core';
 import { AppComponent } from './app.component';
+import { Router, Routes } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+
+const routes: Routes = [{ path: '', redirectTo: 'page/1', pathMatch: 'full' }];
 
 describe('AppComponent', () => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+  let de: DebugElement;
+  let router: Router;
+  let location: Location;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [RouterTestingModule.withRoutes(routes)],
       declarations: [AppComponent],
     }).compileComponents();
   }));
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
-  });
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    de = fixture.debugElement;
 
-  it(`should have as title 'todo'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('todo');
-  });
+    router = TestBed.inject(Router);
+    location = TestBed.inject(Location);
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain(
-      'Welcome to todo!'
-    );
+    router.initialNavigation();
+  });
+
+  it('should create the app', () => {
+    expect(component).toBeTruthy();
   });
 });
