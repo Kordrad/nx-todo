@@ -1,4 +1,4 @@
 export interface EnvironmentInterface {
   production: boolean;
-  apiURL: string;
+  API_URL: string;
 }

@@ -6,7 +6,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { apiUrl } from '@todo-workspace/todo/domain';
+import { API_URL } from '@todo-workspace/todo/domain';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +18,6 @@ import { apiUrl } from '@todo-workspace/todo/domain';
     StoreDevtoolsModule.instrument({ maxAge: 25 }),
   ],
   bootstrap: [AppComponent],
-  providers: [{ provide: apiUrl, useValue: environment.apiURL }],
+  providers: [{ provide: API_URL, useValue: environment.API_URL }],
 })
 export class AppModule {}

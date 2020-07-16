@@ -3,7 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { urlFactory } from '@valueadd/typed-urls';
-import { apiUrl } from '@todo-workspace/todo/domain';
+import { API_URL } from '@todo-workspace/todo/domain';
 
 @Injectable()
 export class TaskDataService {
@@ -19,7 +19,7 @@ export class TaskDataService {
 
   constructor(
     private http: HttpClient,
-    @Inject(apiUrl) private apiUrl: string
+    @Inject(API_URL) private apiUrl: string
   ) {}
 
   getAllTasks({ _start, _limit }: Partial<TaskParameters>): Observable<Task[]> {
