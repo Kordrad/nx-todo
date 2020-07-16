@@ -5,6 +5,4 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   templateUrl: './tasks.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TasksComponent {
-  constructor() {}
-}
+export class TasksComponent {}
