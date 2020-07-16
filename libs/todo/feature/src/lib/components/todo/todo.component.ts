@@ -16,7 +16,7 @@ import { Observable } from 'rxjs';
 })
 export class TodoComponent implements OnInit {
   page = 1;
-  limit = 10;
+  private limit = 10;
   nextBtn$: Observable<boolean>;
   prevBtn$: Observable<boolean>;
   tasks$: Observable<Task[]>;
@@ -38,22 +38,22 @@ export class TodoComponent implements OnInit {
     this.loadTasks();
   }
 
-  setPage(): void {
+  private setPage(): void {
     this.page = Number(this.route.snapshot.paramMap.get('page'));
     this.page = Math.max(1, this.page);
     this.goToPage(this.page);
   }
 
-  loadTasks(): void {
+  private loadTasks(): void {
     this.tasksFacade.loadTasks({
       limit: this.limit,
       page: this.page,
     });
   }
 
-  addTask({ title }: { title: string }): void {
+  addTask(value: { title: string }): void {
     this.tasksFacade.addTask({
-      title: title,
+      title: value.title,
       page: this.page,
       limit: this.limit,
     });
@@ -68,7 +68,7 @@ export class TodoComponent implements OnInit {
     this.goToPage(this.page);
   }
 
-  goToPage(page: number): void {
+  private goToPage(page: number): void {
     this.router.navigate(['/page', page], { relativeTo: this.route });
   }
 

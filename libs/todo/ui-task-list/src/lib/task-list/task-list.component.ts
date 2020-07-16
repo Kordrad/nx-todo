@@ -25,7 +25,6 @@ export class TaskListComponent {
   @Output() deleteTask = new EventEmitter<number>();
   @Output() toggleTask = new EventEmitter<Partial<Task>>();
 
-  limit = 10;
 
   onChangePage(number: number): void {
     this.changePage.emit(this.page + number);
