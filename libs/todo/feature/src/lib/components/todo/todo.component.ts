@@ -69,7 +69,7 @@ export class TodoComponent implements OnInit {
   }
 
   private goToPage(page: number): void {
-    this.router.navigate(['/page', page], { relativeTo: this.route });
+    this.router.navigate(['/page', page]);
   }
 
   onDelete(id: number): void {
