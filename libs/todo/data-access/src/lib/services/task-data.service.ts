@@ -1,4 +1,4 @@
-import { Task, TaskParameters } from '@todo-workspace/todo/domain';
+import { Task, TaskParameters, UpdatePayload } from '@todo-workspace/todo/domain';
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -22,7 +22,7 @@ export class TaskDataService {
     @Inject(API_URL) private apiUrl: string
   ) {}
 
-  getAllTasks({ _start, _limit }: Partial<TaskParameters>): Observable<Task[]> {
+  getAllTasks({ _start, _limit }: TaskParameters): Observable<Task[]> {
     const url = this.endpoints.getAllTasks.url({
       limit: _limit,
       start: _start,
@@ -38,7 +38,7 @@ export class TaskDataService {
     return this.http.delete(this.endpoints.deleteTask.url({ id }));
   }
 
-  updateTask(task: Partial<Task>): Observable<any> {
+  updateTask(task: UpdatePayload): Observable<any> {
     return this.http.put(this.endpoints.updateTask.url({ id: task.id }), task);
   }
 }

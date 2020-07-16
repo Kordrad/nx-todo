@@ -8,9 +8,9 @@ export interface Task {
 }
 
 export interface TaskParameters {
-  page?: number;
+  _end?: string
+  _limit?: string;
   _order?: SortEnum.ascending | SortEnum.descending;
   _sort?: string;
-  _limit?: string;
   _start?: string;
 }

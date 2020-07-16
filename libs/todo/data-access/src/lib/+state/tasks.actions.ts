@@ -1,5 +1,11 @@
 import { Action } from '@ngrx/store';
-import { Task, TaskParameters } from '@todo-workspace/todo/domain';
+import {
+  CreatePayload,
+  DeletePayload,
+  LoadedPayload,
+  LoadPayload,
+  UpdatePayload,
+} from '@todo-workspace/todo/domain';
 
 export namespace tasksActions {
   export enum Types {
@@ -13,33 +19,31 @@ export namespace tasksActions {
   export class Load implements Action {
     readonly type = Types.LoadTask;
 
-    constructor(public params?: TaskParameters) {}
+    constructor(public payload: LoadPayload) {}
   }
 
   export class Loaded implements Action {
     readonly type = Types.LoadTaskSuccess;
 
-    constructor(
-      public payload: { tasks: Task[]; limit: number; page: number }
-    ) {}
+    constructor(public payload: LoadedPayload) {}
   }
 
   export class Create implements Action {
     readonly type = Types.CreateTask;
 
-    constructor(public payload: { [kay: string]: any }) {}
+    constructor(public payload: CreatePayload) {}
   }
 
   export class Update implements Action {
     readonly type = Types.UpdateTask;
 
-    constructor(public task: Partial<Task>) {}
+    constructor(public payload: UpdatePayload) {}
   }
 
   export class Delete implements Action {
     readonly type = Types.DeleteTask;
 
-    constructor(public payload: { [kay: string]: any }) {}
+    constructor(public payload: DeletePayload) {}
   }
 
   export type TaskType = Create | Update | Delete | Load | Loaded;

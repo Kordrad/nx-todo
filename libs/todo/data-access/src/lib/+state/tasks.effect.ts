@@ -13,8 +13,8 @@ export class TasksEffect {
     ofType(tasksActions.Types.LoadTask),
     fetch({
       run: (action: tasksActions.Load) => {
-        const { _limit, page } = action.params;
-        return this.taskDataService.getAllTasks(action.params).pipe(
+        const { _limit, page } = action.payload;
+        return this.taskDataService.getAllTasks(action.payload).pipe(
           map(
             (data) =>
               new tasksActions.Loaded({
@@ -71,8 +71,8 @@ export class TasksEffect {
   updateTask$ = this.actions$.pipe(
     ofType(tasksActions.Types.UpdateTask),
     pessimisticUpdate({
-      run: ({ task }: tasksActions.Update) => {
-        return this.taskDataService.updateTask(task);
+      run: ({ payload }: tasksActions.Update) => {
+        return this.taskDataService.updateTask(payload);
       },
       onError: (action: tasksActions.Update, error: HttpErrorResponse) => {
         return error;

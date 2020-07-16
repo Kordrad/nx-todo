@@ -58,8 +58,8 @@ export function tasksReducer(
     case tasksActions.Types.UpdateTask: {
       return adapter.updateOne(
         {
-          id: action.task.id,
-          changes: action.task,
+          id: action.payload.id,
+          changes: action.payload,
         },
         state
       );

@@ -3,11 +3,17 @@ import { Store } from '@ngrx/store';
 import {
   areTasksLoaded,
   getAllTasks,
-  getPrevPageStatus,
   getNextPageStatus,
+  getPrevPageStatus,
 } from './tasks.selectors';
 import { TaskState } from './tasks.reducer';
 import { tasksActions } from './tasks.actions';
+import {
+  AddTask,
+  DeleteTask,
+  LoadTasks,
+  UpdateTask,
+} from '@todo-workspace/todo/domain';
 
 @Injectable()
 export class TasksFacade {
@@ -18,7 +24,7 @@ export class TasksFacade {
 
   constructor(private store: Store<TaskState>) {}
 
-  loadTasks({ limit, page }) {
+  loadTasks({ limit, page }: LoadTasks) {
     this.store.dispatch(
       new tasksActions.Load({
         _start: `${limit * page - limit}`,
@@ -28,7 +34,7 @@ export class TasksFacade {
     );
   }
 
-  addTask({ title, limit, page }) {
+  addTask({ title, limit, page }: AddTask) {
     this.store.dispatch(
       new tasksActions.Create({
         task: {
@@ -44,7 +50,7 @@ export class TasksFacade {
     );
   }
 
-  updateTask({ id, completed }) {
+  updateTask({ id, completed }: UpdateTask) {
     this.store.dispatch(
       new tasksActions.Update({
         id,
@@ -53,7 +59,7 @@ export class TasksFacade {
     );
   }
 
-  deleteTask({ id, limit, page }) {
+  deleteTask({ id, limit, page }: DeleteTask) {
     this.store.dispatch(
       new tasksActions.Delete({
         id: `${id}`,
