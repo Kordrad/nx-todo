@@ -1,6 +1,6 @@
-import { EnvironmentInterface } from './environment.interface';
+import { Environment } from './environment.interface';
 
-export const environment: EnvironmentInterface = {
+export const environment: Environment = {
   production: true,
   API_URL: 'https://jsonplaceholder.typicode.com/todos/'
 };
