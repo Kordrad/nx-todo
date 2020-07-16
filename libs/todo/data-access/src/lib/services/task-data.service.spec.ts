@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { apiUrl } from '@todo-workspace/todo/domain';
+import { API_URL, Task } from '@todo-workspace/todo/domain';
 import {
   HttpClientTestingModule,
   HttpTestingController,
@@ -42,7 +42,7 @@ const optionsService = {
   _start: '1',
   _limit: '5',
 };
-const url = 'https://test/todos/';
+const url = 'https://test/';
 describe('TaskDataService', () => {
   let myProvider: TaskDataService;
   let httpMock: HttpTestingController;
@@ -53,7 +53,7 @@ describe('TaskDataService', () => {
       providers: [
         TaskDataService,
         {
-          provide: apiUrl,
+          provide: API_URL,
           useValue: url,
         },
       ],
@@ -66,12 +66,12 @@ describe('TaskDataService', () => {
   });
 
   it('should return an Observable<Task[]>', () => {
-    myProvider.getAllTasks(optionsService).subscribe((tasks) => {
+    myProvider.getAllTasks(optionsService).subscribe((tasks: Task[]) => {
       expect(tasks.length).toBe(5);
     });
 
     const request = httpMock.expectOne(
-      url + `?_start=${optionsService._start}&_limit=${optionsService._limit}`
+      url + `todos/?_start=${optionsService._start}&_limit=${optionsService._limit}`
     );
 
     expect(request.request.method).toBe('GET');

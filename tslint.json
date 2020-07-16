@@ -60,10 +60,7 @@
         "depConstraints": [
           {
             "sourceTag": "type:app",
-            "onlyDependOnLibsWithTags": [
-              "type:shell",
-              "type:domain"
-            ]
+            "onlyDependOnLibsWithTags": ["type:shell", "type:domain"]
           },
           {
             "sourceTag": "type:shell",
@@ -85,24 +82,15 @@
           },
           {
             "sourceTag": "type:util",
-            "onlyDependOnLibsWithTags": [
-              "type:util",
-              "type:domain"
-            ]
+            "onlyDependOnLibsWithTags": ["type:util", "type:domain"]
           },
           {
             "sourceTag": "type:ui",
-            "onlyDependOnLibsWithTags": [
-              "type:ui",
-              "type:util",
-              "type:domain"
-            ]
+            "onlyDependOnLibsWithTags": ["type:ui", "type:util", "type:domain"]
           },
           {
             "sourceTag": "type:domain",
-            "onlyDependOnLibsWithTags": [
-              "type:domain"
-            ]
+            "onlyDependOnLibsWithTags": ["type:domain"]
           },
           {
             "sourceTag": "type:data-access",
@@ -114,9 +102,7 @@
           },
           {
             "sourceTag": "scope:shared",
-            "onlyDependOnLibsWithTags": [
-              "scope:shared"
-            ]
+            "onlyDependOnLibsWithTags": ["scope:shared"]
           }
         ]
       }
@@ -134,6 +120,13 @@
     "template-banana-in-box": true,
     "template-no-negated-async": true,
     "use-lifecycle-interface": true,
-    "use-pipe-transform-interface": true
+    "use-pipe-transform-interface": true,
+    "typedef": [
+      true,
+      "call-signature",
+      "property-declaration",
+      "parameter",
+      "arrow-parameter"
+    ]
   }
 }

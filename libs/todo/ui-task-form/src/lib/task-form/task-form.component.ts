@@ -21,19 +21,18 @@ export class TaskFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.taskForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(3)]],
     });
   }
 
-  onSubmit(form) {
+  onSubmit(form: FormGroup): void {
     // stop here if form is invalid
     if (form.invalid) {
       return;
     }
     this.done.emit(form.value);
     this.taskForm.reset();
-
   }
 }

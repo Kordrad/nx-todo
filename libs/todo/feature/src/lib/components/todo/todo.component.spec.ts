@@ -10,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { TodoDataAccessModule } from '@todo-workspace/todo/data-access';
-import { apiUrl } from '@todo-workspace/todo/domain';
+import { API_URL } from '@todo-workspace/todo/domain';
 
 
 describe('TaskFormComponent', () => {
@@ -31,7 +31,7 @@ describe('TaskFormComponent', () => {
         RouterTestingModule.withRoutes([])
       ],
       declarations: [TodoComponent],
-      providers: [{ provide: apiUrl, useValue: 'https://jsonplaceholder.typicode.com/todos/' }],
+      providers: [{ provide: API_URL, useValue: 'https://jsonplaceholder.typicode.com/todos/' }],
     }).compileComponents();
   }));
 

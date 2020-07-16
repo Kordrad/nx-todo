@@ -30,7 +30,7 @@ export class TodoComponent implements OnInit {
     private cdref: ChangeDetectorRef
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.tasks$ = this.tasksFacade.tasks$;
     this.tasksLoaded$ = this.tasksFacade.tasksLoaded$;
     this.nextBtn$ = this.tasksFacade.nextPageStatus$;
@@ -40,13 +40,13 @@ export class TodoComponent implements OnInit {
     this.loadTasks();
   }
 
-  setPage() {
+  setPage(): void {
     this.page = Number(this.route.snapshot.paramMap.get('page'));
-    this.page = this.page >= 1 ? this.page : (this.page = 1);
+    this.page = Math.max(1, this.page);
     this.goToPage(this.page);
   }
 
-  loadTasks() {
+  loadTasks(): void {
     this.tasksFacade.loadTasks({
       limit: this.limit,
       page: this.page,
@@ -54,15 +54,15 @@ export class TodoComponent implements OnInit {
     this.cdref.markForCheck();
   }
 
-  addTask(form) {
+  addTask({ title }: { title: string }): void {
     this.tasksFacade.addTask({
-      title: form.title,
+      title: title,
       page: this.page,
       limit: this.limit,
     });
   }
 
-  onChangePage(value: number) {
+  onChangePage(value: number): void {
     this.page = value;
     this.tasksFacade.loadTasks({
       page: this.page,
@@ -71,18 +71,15 @@ export class TodoComponent implements OnInit {
     this.goToPage(this.page);
   }
 
-  goToPage(number) {
-    if (number < 1) {
-      number = 1;
-    }
-    this.router.navigate(['/page', number], { relativeTo: this.route });
+  goToPage(page: number): void {
+    this.router.navigate(['/page', page], { relativeTo: this.route });
   }
 
-  onDelete(id) {
+  onDelete(id: number): void {
     this.tasksFacade.deleteTask({ id, page: this.page, limit: this.limit });
   }
 
-  onChangeTask({ id, completed }: Partial<Task>) {
+  onChangeTask({ id, completed }: Partial<Task>): void {
     this.tasksFacade.updateTask({ id, completed });
   }
 }

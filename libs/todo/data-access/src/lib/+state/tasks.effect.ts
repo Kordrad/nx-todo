@@ -5,6 +5,7 @@ import { tasksActions } from './tasks.actions';
 import { map } from 'rxjs/operators';
 import { fetch, pessimisticUpdate } from '@nrwl/angular';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Task } from '@todo-workspace/todo/domain';
 
 @Injectable()
 export class TasksEffect {
@@ -16,7 +17,7 @@ export class TasksEffect {
         const { _limit, page } = action.payload;
         return this.taskDataService.getAllTasks(action.payload).pipe(
           map(
-            (data) =>
+            (data: Task[]) =>
               new tasksActions.Loaded({
                 tasks: data,
                 limit: Number(_limit) -1,

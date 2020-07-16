@@ -9,15 +9,15 @@ export const getAllTasks = createSelector(taskFeatureSelector, selectAll);
 
 export const areTasksLoaded = createSelector(
   taskFeatureSelector,
-  (state) => state.tasksLoaded
+  (state: TaskState) => state.tasksLoaded
 );
 
 export const getNextPageStatus = createSelector(
   taskFeatureSelector,
-  (state) => state.nextPage
+  (state: TaskState) => state.nextPage
 );
 
 export const getPrevPageStatus = createSelector(
   taskFeatureSelector,
-  (state) => state.prevPage
+  (state: TaskState) => state.prevPage
 );

@@ -25,7 +25,7 @@ export const initialState = adapter.getInitialState({
 export function tasksReducer(
   state: TaskState = initialState,
   action: tasksActions.TaskType
-) {
+): TaskState {
   switch (action.type) {
     case tasksActions.Types.LoadTask: {
       return adapter.removeAll({ ...state, tasksLoaded: false });
@@ -33,7 +33,7 @@ export function tasksReducer(
 
     case tasksActions.Types.LoadTaskSuccess: {
       const { tasks, limit, page } = action.payload;
-      let tasksList = [...tasks];
+      const tasksList = [...tasks];
       let nextPage = false;
       let prevPage = false;
       const currentPage = page || state.page;
@@ -42,7 +42,7 @@ export function tasksReducer(
         tasksList.pop();
         nextPage = true;
       }
-      if (currentPage > 1 ) {
+      if (currentPage > 1) {
         prevPage = true;
       }
       return adapter.addMany(tasksList, {

@@ -71,15 +71,15 @@ describe('TaskFormComponent', () => {
     });
 
     it('should sets empty string by default', () => {
-      const component = TestBed.createComponent(TaskFormComponent)
+      const componentInstance: TaskFormComponent = TestBed.createComponent(TaskFormComponent)
         .componentInstance;
-      expect(component.header).toBe('');
-      expect(component.header.length).toBe(0);
+      expect(componentInstance.header).toBe('');
+      expect(componentInstance.header.length).toBe(0);
     });
 
     it('should not render header if property is null', () => {
-      const de = TestBed.createComponent(TaskFormComponent).debugElement;
-      expect(de.query(By.css('h1'))).toBeNull();
+      const debugElement: DebugElement = TestBed.createComponent(TaskFormComponent).debugElement;
+      expect(debugElement.query(By.css('h1'))).toBeNull();
     });
   });
 
@@ -155,17 +155,13 @@ describe('TaskFormComponent', () => {
 });
 
 @Component({
-  selector: 'test-component-wrapper',
+  selector: 'todo-workspace-test-wrapper',
   template: `
     <todo-workspace-task-form
       [header]="header"
-      (done)="emittedDone($event)"
     ></todo-workspace-task-form>
   `,
 })
 class TestComponentWrapper {
   header = exampleProperties.header;
-  emittedDone(event) {
-    return event;
-  }
 }

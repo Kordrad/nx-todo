@@ -27,19 +27,19 @@ export class TaskListComponent {
 
   limit = 10;
 
-  onChangePage(number: number) {
+  onChangePage(number: number): void {
     this.changePage.emit(this.page + number);
   }
 
-  onUpdateTask({ checked }, id) {
+  onUpdateTask({ checked }: { checked: boolean }, id: number): void {
     this.toggleTask.emit({ id, completed: checked });
   }
 
-  onDeleteTask(id: number) {
+  onDeleteTask(id: number): void {
     this.deleteTask.emit(id);
   }
 
-  trackByFn(index, item) {
-    return item.id
+  trackByFn(index: number, item: HTMLElement): string {
+    return item.id;
   }
 }
