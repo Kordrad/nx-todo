@@ -14,17 +14,15 @@ export class TasksEffect {
     ofType(tasksActions.Types.LoadTask),
     fetch({
       run: (action: tasksActions.Load) => {
-        const { _limit, page } = action.payload;
-        return this.taskDataService.getAllTasks(action.payload).pipe(
-          map(
-            (data: Task[]) =>
-              new tasksActions.Loaded({
-                tasks: data,
-                limit: Number(_limit) -1,
-                page: page,
-              })
-          )
-        );
+        const limit = Number(action.payload.parameters._limit) - 1;
+        const { page, parameters } = action.payload;
+        return this.taskDataService
+          .getAllTasks(parameters)
+          .pipe(
+            map(
+              (tasks: Task[]) => new tasksActions.Loaded({ tasks, limit, page })
+            )
+          );
       },
       onError: (action: tasksActions.Load, error: HttpErrorResponse) => {
         return error;
@@ -37,12 +35,10 @@ export class TasksEffect {
     ofType(tasksActions.Types.CreateTask),
     pessimisticUpdate({
       run: (action: tasksActions.Create) => {
-        const { task, _limit, _start } = action.payload;
-        return this.taskDataService.createTask(task).pipe(
-          map(() => {
-            return new tasksActions.Load({ _limit, _start });
-          })
-        );
+        const { task, parameters } = action.payload;
+        return this.taskDataService
+          .createTask(task)
+          .pipe(map(() => new tasksActions.Load({ parameters })));
       },
       onError: (action: tasksActions.Create, error: HttpErrorResponse) => {
         return error;
@@ -55,12 +51,10 @@ export class TasksEffect {
     ofType(tasksActions.Types.DeleteTask),
     pessimisticUpdate({
       run: (action: tasksActions.Delete) => {
-        const { id, _limit, _start } = action.payload;
-        return this.taskDataService.deleteTask(id).pipe(
-          map(() => {
-            return new tasksActions.Load({ _limit, _start });
-          })
-        );
+        const { id, parameters } = action.payload;
+        return this.taskDataService
+          .deleteTask(id)
+          .pipe(map(() => new tasksActions.Load({ parameters })));
       },
       onError: (action: tasksActions.Delete, error: HttpErrorResponse) => {
         return error;

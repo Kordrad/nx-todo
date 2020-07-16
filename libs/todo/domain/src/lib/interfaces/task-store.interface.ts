@@ -2,7 +2,8 @@ import { Task, TaskParameters } from '@todo-workspace/todo/domain';
 
 export type UpdatePayload = Partial<Task>;
 
-export interface LoadPayload extends TaskParameters {
+export interface LoadPayload {
+  parameters: TaskParameters,
   page?: number;
 }
 
@@ -14,11 +15,13 @@ export interface LoadedPayload {
 
 export interface CreatePayload extends TaskParameters {
   task: Task;
+  parameters: TaskParameters,
   page?: number;
 }
 
 export interface DeletePayload extends TaskParameters {
   id: string;
+  parameters: TaskParameters,
   page?: number;
 }
 

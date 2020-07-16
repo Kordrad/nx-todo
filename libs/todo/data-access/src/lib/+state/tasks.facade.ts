@@ -27,8 +27,10 @@ export class TasksFacade {
   loadTasks({ limit, page }: LoadTasks): void {
     this.store.dispatch(
       new tasksActions.Load({
-        _start: `${limit * page - limit}`,
-        _limit: `${limit + 1}`,
+        parameters: {
+          _start: `${limit * page - limit}`,
+          _limit: `${limit + 1}`,
+        },
         page,
       })
     );
@@ -43,8 +45,10 @@ export class TasksFacade {
           userId: 1,
           id: new Date().valueOf(),
         },
-        _start: `${limit * page - limit}`,
-        _limit: `${limit + 1}`,
+        parameters: {
+          _start: `${limit * page - limit}`,
+          _limit: `${limit + 1}`,
+        },
         page,
       })
     );
@@ -63,8 +67,10 @@ export class TasksFacade {
     this.store.dispatch(
       new tasksActions.Delete({
         id: `${id}`,
-        _start: `${limit * page - limit}`,
-        _limit: `${limit + 1}`,
+        parameters: {
+          _start: `${limit * page - limit}`,
+          _limit: `${limit + 1}`,
+        },
         page,
       })
     );

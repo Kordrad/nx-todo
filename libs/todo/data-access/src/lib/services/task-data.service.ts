@@ -1,6 +1,10 @@
-import { Task, TaskParameters, UpdatePayload } from '@todo-workspace/todo/domain';
+import {
+  Task,
+  TaskParameters,
+  UpdatePayload,
+} from '@todo-workspace/todo/domain';
 import { Inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { urlFactory } from '@valueadd/typed-urls';
 import { API_URL } from '@todo-workspace/todo/domain';
@@ -8,10 +12,7 @@ import { API_URL } from '@todo-workspace/todo/domain';
 @Injectable()
 export class TaskDataService {
   readonly endpoints = {
-    getAllTasks: urlFactory<'limit' | 'start'>(
-      this.apiUrl + 'todos/?_start=:start&_limit=:limit',
-      true
-    ),
+    getAllTasks: urlFactory(this.apiUrl + 'todos/'),
     createTask: urlFactory(this.apiUrl + 'todos/'),
     deleteTask: urlFactory<'id'>(this.apiUrl + 'todos/:id', true),
     updateTask: urlFactory<'id'>(this.apiUrl + 'todos/:id', true),
@@ -22,12 +23,10 @@ export class TaskDataService {
     @Inject(API_URL) private apiUrl: string
   ) {}
 
-  getAllTasks({ _start, _limit }: TaskParameters): Observable<Task[]> {
-    const url = this.endpoints.getAllTasks.url({
-      limit: _limit,
-      start: _start,
-    });
-    return this.http.get<Array<Task>>(url);
+  getAllTasks(parameters: TaskParameters): Observable<Task[]> {
+    const url = this.endpoints.getAllTasks.url();
+    const params = new HttpParams({ fromObject: { ...parameters } });
+    return this.http.get<Array<Task>>(url, { params });
   }
 
   createTask(task: Task): Observable<Task> {
