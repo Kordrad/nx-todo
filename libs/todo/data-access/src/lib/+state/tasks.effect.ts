@@ -25,7 +25,7 @@ export class TasksEffect {
           )
         );
       },
-      onError: (action: any, error: any) => {
+      onError: (action: tasksActions.Load, error: HttpErrorResponse) => {
         return error;
       },
     })
