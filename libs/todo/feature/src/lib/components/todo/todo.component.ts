@@ -1,6 +1,5 @@
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   OnInit,
 } from '@angular/core';
@@ -27,7 +26,6 @@ export class TodoComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private tasksFacade: TasksFacade,
-    private cdref: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -51,7 +49,6 @@ export class TodoComponent implements OnInit {
       limit: this.limit,
       page: this.page,
     });
-    this.cdref.markForCheck();
   }
 
   addTask({ title }: { title: string }): void {
