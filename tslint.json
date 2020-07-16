@@ -61,7 +61,8 @@
           {
             "sourceTag": "type:app",
             "onlyDependOnLibsWithTags": [
-              "type:shell"
+              "type:shell",
+              "type:domain"
             ]
           },
           {
