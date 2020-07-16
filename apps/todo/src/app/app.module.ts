@@ -15,7 +15,9 @@ import { API_URL } from '@todo-workspace/todo/domain';
     TodoShellModule,
     StoreModule.forRoot([]),
     EffectsModule.forRoot([]),
-    StoreDevtoolsModule.instrument({ maxAge: 25 }),
+    environment.production === false
+      ? StoreDevtoolsModule.instrument({ maxAge: 25 })
+      : [],
   ],
   bootstrap: [AppComponent],
   providers: [{ provide: API_URL, useValue: environment.API_URL }],
