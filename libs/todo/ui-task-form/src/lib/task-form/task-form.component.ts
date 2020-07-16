@@ -27,12 +27,12 @@ export class TaskFormComponent implements OnInit {
     });
   }
 
-  onSubmit(form: FormGroup): void {
+  onSubmit(): void {
     // stop here if form is invalid
-    if (form.invalid) {
+    if (this.taskForm.invalid) {
       return;
     }
-    this.done.emit(form.value);
+    this.done.emit(this.taskForm.value);
     this.taskForm.reset();
   }
 }
