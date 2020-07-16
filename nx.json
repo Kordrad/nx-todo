@@ -23,7 +23,7 @@
   },
   "projects": {
     "todo": {
-      "tags": ["type:application"]
+      "tags": ["type:app"]
     },
     "todo-e2e": {
       "tags": [],
