@@ -9,12 +9,12 @@ import { API_URL } from '@todo-workspace/todo/domain';
 export class TaskDataService {
   readonly endpoints = {
     getAllTasks: urlFactory<'limit' | 'start'>(
-      this.apiUrl + '?_start=:start&_limit=:limit',
+      this.apiUrl + 'todos/?_start=:start&_limit=:limit',
       true
     ),
-    createTask: urlFactory(this.apiUrl),
-    deleteTask: urlFactory<'id'>(this.apiUrl + ':id', true),
-    updateTask: urlFactory<'id'>(this.apiUrl + ':id', true),
+    createTask: urlFactory(this.apiUrl + 'todos/'),
+    deleteTask: urlFactory<'id'>(this.apiUrl + 'todos/:id', true),
+    updateTask: urlFactory<'id'>(this.apiUrl + 'todos/:id', true),
   };
 
   constructor(

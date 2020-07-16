@@ -6,7 +6,7 @@ import { Environment } from './environment.interface';
 
 export const environment: Environment = {
   production: false,
-  API_URL: 'https://jsonplaceholder.typicode.com/todos/',
+  API_URL: 'https://jsonplaceholder.typicode.com/',
 };
 
 /*
