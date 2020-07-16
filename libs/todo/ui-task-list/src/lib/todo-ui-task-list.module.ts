@@ -20,6 +20,5 @@ import { TaskListComponent } from './task-list/task-list.component';
   ],
   declarations: [TaskListComponent],
   exports: [TaskListComponent],
-  entryComponents: [TaskListComponent],
 })
 export class TodoUiTaskListModule {}

@@ -14,6 +14,5 @@ import { TodoDataAccessModule } from '@todo-workspace/todo/data-access';
   ],
   declarations: [TodoComponent],
   exports: [TodoComponent],
-  entryComponents: [TodoComponent],
 })
 export class TodoFeatureModule {}

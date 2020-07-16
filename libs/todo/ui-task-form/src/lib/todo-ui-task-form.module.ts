@@ -16,6 +16,5 @@ import { TaskFormComponent } from './task-form/task-form.component';
   ],
   declarations: [TaskFormComponent],
   exports: [TaskFormComponent],
-  entryComponents: [TaskFormComponent],
 })
 export class TodoUiTaskFormModule {}
