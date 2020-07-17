@@ -16,7 +16,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class TaskFormComponent implements OnInit {
   @Input() header = '';
-  @Output() done = new EventEmitter<string>();
+  @Output() done = new EventEmitter<object>();
   taskForm: FormGroup;
 
   constructor(private fb: FormBuilder) {}
