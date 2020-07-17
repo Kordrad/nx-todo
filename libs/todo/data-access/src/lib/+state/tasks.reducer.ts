@@ -1,15 +1,15 @@
 import { tasksActions } from './tasks.actions';
-import { Task } from '@todo-workspace/todo/domain';
+import { Task, TaskParameters } from '@todo-workspace/todo/domain';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
 export const TASKS_FEATURE_KEY = 'tasks';
 
 export interface TaskState extends EntityState<Task> {
   tasksLoaded: boolean;
-  limit: number;
   nextPage: boolean;
   prevPage: boolean;
   page: number;
+  parameters: TaskParameters;
 }
 
 export const adapter: EntityAdapter<Task> = createEntityAdapter<Task>();
@@ -20,6 +20,7 @@ export const initialState = adapter.getInitialState({
   nextPage: false,
   prevPage: false,
   page: 1,
+  parameters: {},
 });
 
 export function tasksReducer(
@@ -28,14 +29,20 @@ export function tasksReducer(
 ): TaskState {
   switch (action.type) {
     case tasksActions.Types.LoadTask: {
-      return adapter.removeAll({ ...state, tasksLoaded: false });
+      return {
+        ...state,
+        tasksLoaded: false,
+        nextPage: false,
+        prevPage: false,
+        parameters: action.payload.parameters,
+      };
     }
 
     case tasksActions.Types.LoadTaskSuccess: {
       const { tasks, limit, page } = action.payload;
+      let { prevPage, nextPage } = state;
       const tasksList = [...tasks];
-      let nextPage = false;
-      let prevPage = false;
+
       const currentPage = page || state.page;
 
       if (tasksList.length === limit + 1) {
@@ -45,13 +52,15 @@ export function tasksReducer(
       if (currentPage > 1) {
         prevPage = true;
       }
+
       return adapter.addMany(tasksList, {
-        ...state,
+        ...adapter.removeAll(state),
         limit,
         nextPage,
         prevPage,
         page: currentPage,
         tasksLoaded: true,
+        start: limit * page - limit,
       });
     }
 

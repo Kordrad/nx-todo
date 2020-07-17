@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Task } from '@todo-workspace/todo/domain';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TasksFacade } from '@todo-workspace/todo/data-access';
@@ -25,7 +21,7 @@ export class TodoComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private tasksFacade: TasksFacade,
+    private tasksFacade: TasksFacade
   ) {}
 
   ngOnInit(): void {
@@ -45,27 +41,17 @@ export class TodoComponent implements OnInit {
   }
 
   private loadTasks(): void {
-    this.tasksFacade.loadTasks({
-      limit: this.limit,
-      page: this.page,
-    });
+    this.tasksFacade.loadTasks(this.page, this.limit);
   }
 
   addTask(value: { title: string }): void {
-    this.tasksFacade.addTask({
-      title: value.title,
-      page: this.page,
-      limit: this.limit,
-    });
+    this.tasksFacade.addTask(value.title);
   }
 
   onChangePage(value: number): void {
     this.page = value;
-    this.tasksFacade.loadTasks({
-      page: this.page,
-      limit: this.limit,
-    });
     this.goToPage(this.page);
+    this.tasksFacade.loadTasks(this.page, this.limit);
   }
 
   private goToPage(page: number): void {
@@ -73,10 +59,10 @@ export class TodoComponent implements OnInit {
   }
 
   onDelete(id: number): void {
-    this.tasksFacade.deleteTask({ id, page: this.page, limit: this.limit });
+    this.tasksFacade.deleteTask(id);
   }
 
   onChangeTask({ id, completed }: Partial<Task>): void {
-    this.tasksFacade.updateTask({ id, completed });
+    this.tasksFacade.updateTask(id, completed);
   }
 }

@@ -8,6 +8,7 @@ import { TasksEffect } from './+state/tasks.effect';
 import { TASKS_FEATURE_KEY, tasksReducer } from './+state/tasks.reducer';
 import { TasksFacade } from './+state/tasks.facade';
 import { TaskDataService } from './services/task-data.service';
+import { DataPersistence } from '@nrwl/angular';
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import { TaskDataService } from './services/task-data.service';
     EffectsModule.forFeature([TasksEffect]),
     HttpClientModule,
   ],
-  providers: [TaskDataService, TasksFacade],
+  providers: [TaskDataService, TasksFacade, DataPersistence],
 })
 export class TodoDataAccessModule {}

@@ -33,7 +33,7 @@ export class TaskDataService {
     return this.http.post<Task>(this.endpoints.createTask.url(), task);
   }
 
-  deleteTask(id: string): Observable<any> {
+  deleteTask(id: number): Observable<any> {
     return this.http.delete(this.endpoints.deleteTask.url({ id }));
   }
 

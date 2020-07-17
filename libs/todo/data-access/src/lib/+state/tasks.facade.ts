@@ -8,12 +8,6 @@ import {
 } from './tasks.selectors';
 import { TaskState } from './tasks.reducer';
 import { tasksActions } from './tasks.actions';
-import {
-  AddTask,
-  DeleteTask,
-  LoadTasks,
-  UpdateTask,
-} from '@todo-workspace/todo/domain';
 
 @Injectable()
 export class TasksFacade {
@@ -24,55 +18,30 @@ export class TasksFacade {
 
   constructor(private store: Store<TaskState>) {}
 
-  loadTasks({ limit, page }: LoadTasks): void {
-    this.store.dispatch(
-      new tasksActions.Load({
-        parameters: {
-          _start: `${limit * page - limit}`,
-          _limit: `${limit + 1}`,
-        },
-        page,
-      })
-    );
+  loadTasks(page: number, limit: number = 10): void {
+    const parameters = {
+      _start: `${limit * page - limit}`,
+      _limit: `${limit + 1}`,
+    };
+    this.store.dispatch(new tasksActions.Load({ parameters, page }));
   }
 
-  addTask({ title, limit, page }: AddTask): void {
-    this.store.dispatch(
-      new tasksActions.Create({
-        task: {
-          title: title,
-          completed: false,
-          userId: 1,
-          id: new Date().valueOf(),
-        },
-        parameters: {
-          _start: `${limit * page - limit}`,
-          _limit: `${limit + 1}`,
-        },
-        page,
-      })
-    );
+  addTask(title: string): void {
+    const task = {
+      title: title,
+      completed: false,
+      userId: 1,
+      id: new Date().valueOf(),
+    };
+
+    this.store.dispatch(new tasksActions.Create({ task }));
   }
 
-  updateTask({ id, completed }: UpdateTask): void {
-    this.store.dispatch(
-      new tasksActions.Update({
-        id,
-        completed,
-      })
-    );
+  updateTask(id: number, completed: boolean): void {
+    this.store.dispatch(new tasksActions.Update({ id, completed }));
   }
 
-  deleteTask({ id, limit, page }: DeleteTask): void {
-    this.store.dispatch(
-      new tasksActions.Delete({
-        id: `${id}`,
-        parameters: {
-          _start: `${limit * page - limit}`,
-          _limit: `${limit + 1}`,
-        },
-        page,
-      })
-    );
+  deleteTask(id: number): void {
+    this.store.dispatch(new tasksActions.Delete({ id }));
   }
 }
