@@ -28,7 +28,8 @@
       "@todo-workspace/todo/ui-task-list": [
         "libs/todo/ui-task-list/src/index.ts"
       ],
-      "@todo-workspace/shared/domain": ["libs/shared/domain/src/index.ts"]
+      "@todo-workspace/shared/domain": ["libs/shared/domain/src/index.ts"],
+      "@todo-workspace/shared/util": ["libs/shared/util/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

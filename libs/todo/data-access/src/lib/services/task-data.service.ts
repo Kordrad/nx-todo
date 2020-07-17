@@ -4,10 +4,11 @@ import {
   UpdatePayload,
 } from '@todo-workspace/todo/domain';
 import { Inject, Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { urlFactory } from '@valueadd/typed-urls';
 import { API_URL } from '@todo-workspace/todo/domain';
+import { addParams } from '@todo-workspace/shared/util';
 
 @Injectable()
 export class TaskDataService {
@@ -25,8 +26,7 @@ export class TaskDataService {
 
   getAllTasks(parameters: TaskParameters): Observable<Task[]> {
     const url = this.endpoints.getAllTasks.url();
-    const params = new HttpParams({ fromObject: { ...parameters } });
-    return this.http.get<Array<Task>>(url, { params });
+    return this.http.get<Array<Task>>(url, { params: addParams(parameters) });
   }
 
   createTask(task: Task): Observable<Task> {

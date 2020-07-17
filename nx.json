@@ -49,6 +49,9 @@
     },
     "shared-domain": {
       "tags": ["type:domain", "scope:shared"]
+    },
+    "shared-util": {
+      "tags": ["type: util", "scope:shared"]
     }
   }
 }
