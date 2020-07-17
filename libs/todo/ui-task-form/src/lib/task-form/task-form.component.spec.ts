@@ -155,7 +155,6 @@ describe('TaskFormComponent', () => {
 });
 
 @Component({
-  selector: 'todo-workspace-test-wrapper',
   template: `
     <todo-workspace-task-form
       [header]="header"
