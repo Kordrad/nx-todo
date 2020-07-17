@@ -57,7 +57,6 @@ describe('TaskFormComponent', () => {
   describe('header', () => {
     it(`input of header should gets string ("${exampleProperties.header}")`, () => {
       expect(component.header).toBe(exampleProperties.header);
-      expect(component.header).not.toBe('');
     });
 
     it('should render header if property is not empty', () => {
@@ -65,7 +64,7 @@ describe('TaskFormComponent', () => {
     });
 
     it(`should render text in h1`, () => {
-      expect(de.query(By.css('h1')).nativeElement.innerHTML).toBe(
+      expect(de.query(By.css('h1')).nativeElement.textContent).toBe(
         exampleProperties.header
       );
     });
