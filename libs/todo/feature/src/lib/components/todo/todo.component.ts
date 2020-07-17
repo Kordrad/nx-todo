@@ -44,7 +44,7 @@ export class TodoComponent implements OnInit {
     this.tasksFacade.loadTasks(this.page, this.limit);
   }
 
-  addTask(value: { title: string }): void {
+  addTask(value: { [key: string]: any }): void {
     this.tasksFacade.addTask(value.title);
   }
 

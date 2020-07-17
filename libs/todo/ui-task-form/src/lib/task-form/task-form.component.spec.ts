@@ -45,7 +45,7 @@ describe('TaskFormComponent', () => {
     component = fixture.debugElement.children[0].componentInstance;
     de = fixture.debugElement.children[0];
 
-    input = de.query(By.css('input')).nativeElement;
+    input = de.query(By.css('[data-test-id="input"]')).nativeElement;
 
     fixture.detectChanges();
   });
@@ -60,11 +60,11 @@ describe('TaskFormComponent', () => {
     });
 
     it('should render header if property is not empty', () => {
-      expect(de.query(By.css('h1'))).toBeTruthy();
+      expect(de.query(By.css('[data-test-id="header"]'))).toBeTruthy();
     });
 
     it(`should render text in h1`, () => {
-      expect(de.query(By.css('h1')).nativeElement.textContent).toBe(
+      expect(de.query(By.css('[data-test-id="header"]')).nativeElement.textContent.trim()).toBe(
         exampleProperties.header
       );
     });
@@ -78,7 +78,7 @@ describe('TaskFormComponent', () => {
 
     it('should not render header if property is null', () => {
       const debugElement: DebugElement = TestBed.createComponent(TaskFormComponent).debugElement;
-      expect(debugElement.query(By.css('h1'))).toBeNull();
+      expect(debugElement.query(By.css('[data-test-id="header"]'))).toBeNull();
     });
   });
 
@@ -92,7 +92,7 @@ describe('TaskFormComponent', () => {
       expect(input.value).toBe(inputValue);
       tick();
 
-      const buttonClose = de.query(By.css('button[type="reset"]'))
+      const buttonClose = de.query(By.css('button[data-test-id="close_button"]'))
         .nativeElement;
 
       buttonClose.click();
@@ -109,7 +109,7 @@ describe('TaskFormComponent', () => {
       expect(input.value).toBe(inputValue);
       tick();
 
-      const buttonDone = de.query(By.css('button[type="submit"]'))
+      const buttonDone = de.query(By.css('button[data-test-id="done_button"]'))
         .nativeElement;
 
       buttonDone.click();
@@ -126,7 +126,7 @@ describe('TaskFormComponent', () => {
       expect(input.value).toBe(inputValue);
       tick();
 
-      const buttonDone = de.query(By.css('button[type="submit"]'))
+      const buttonDone = de.query(By.css('button[data-test-id="done_button"]'))
         .nativeElement;
       buttonDone.click();
       expect(doneSpy).toHaveBeenCalled();
@@ -142,7 +142,7 @@ describe('TaskFormComponent', () => {
       expect(input.value).toBe(inputValue);
       tick();
 
-      const form = de.query(By.css('form')).nativeElement;
+      const form = de.query(By.css('[data-test-id="form"]')).nativeElement;
       form.submit()
       fixture.detectChanges();
       tick();
