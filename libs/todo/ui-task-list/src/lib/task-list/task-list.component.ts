@@ -6,6 +6,7 @@ import {
   Output,
 } from '@angular/core';
 import { Task } from '@todo-workspace/todo/domain';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 
 @Component({
   selector: 'todo-workspace-task-list',
@@ -25,12 +26,11 @@ export class TaskListComponent {
   @Output() deleteTask = new EventEmitter<number>();
   @Output() toggleTask = new EventEmitter<Partial<Task>>();
 
-
   onChangePage(number: number): void {
     this.changePage.emit(this.page + number);
   }
 
-  onUpdateTask({ checked }: { checked: boolean }, id: number): void {
+  onUpdateTask({ checked }: MatCheckboxChange, id: number): void {
     this.toggleTask.emit({ id, completed: checked });
   }
 
@@ -38,7 +38,7 @@ export class TaskListComponent {
     this.deleteTask.emit(id);
   }
 
-  trackByFn(index: number, item: HTMLElement): string {
+  trackByFn(index: number, item: Task): number {
     return item.id;
   }
 }
